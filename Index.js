@@ -54,10 +54,10 @@ app.delete("/delete/:id", async (req, res) => {
 
 
 //FETCH ALL YOUR DATA
-app.get("/findall", async (req, res) => {
+app.get("/getAllList", async (req, res) => {
   let find = await userSchema.find()
   res.send(find);
-    console.log(result)
+   // console.log(result)
 })
 
 
