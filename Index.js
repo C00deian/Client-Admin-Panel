@@ -10,7 +10,6 @@ app.use(express.json())
 //POST YOUR DATA INTO DB
 app.post('/add', async(req,res)=>{
   let data = await userSchema.insertMany(req.body)
-
   res.send(data)
   console.log(data);
 })
@@ -24,8 +23,7 @@ app.put("/update/:id", async (req, res) => {
   let data = await userSchema.findByIdAndUpdate(req.params.id,{
      name: req.body.name,
      email:req.body.email ,
-      password:req.body.password , 
-      age:req.body.age} )
+     } )
 
   res.send(data);
 
@@ -83,7 +81,7 @@ app.get("/asending", async (req, res) => {
 
 
 app.get("/Increament", async ( req ,res ) => {
-  let incre = await userSchema.find(req.params.id).sort('age')
+ // let incre = await userSchema.find(req.params.id).sort('age')
   console.log("successfully Updated")
   res.send(incre);
 })
