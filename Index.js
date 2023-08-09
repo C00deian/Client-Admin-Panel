@@ -30,6 +30,7 @@ async function getExpiredEmployees() {
   }
 }
 
+
 app.get("/akash", async (req, res) => {
   let find = getExpiredEmployees();
   res.send(find);
@@ -77,6 +78,7 @@ app.put("/client/:id", async (req, res) => {
 
 
 })
+
 //DELETE YOUR DATA
 app.delete("/client/:id", async (req, res) => {
   let data = await userSchema.findByIdAndDelete(req.params.id)
@@ -84,16 +86,6 @@ app.delete("/client/:id", async (req, res) => {
 
 });
 
-//    app.delete("/delete/", async (req, res) => {
-//      let data = await userSchema.remove({ _id: "641c26ec9bba12aa6f7a7afd"},
-// )
-
-// try {
-// res.send(data);
-// } catch (error) {
-// console.log("somthing went wrong")
-// }
-// });
 
 
 
