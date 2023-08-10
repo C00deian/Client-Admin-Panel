@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
   name: String,
   email: String,
   contact: String,
-  expiary: {type:Date},
+  expiary: String,
   message: String,
   selectedOption1: String,
   selectedOption2: String,
