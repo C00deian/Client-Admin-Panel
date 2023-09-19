@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require('cors')
-
+ const port = 5000;
 
 app.use(cors())
 const mongoose = require('mongoose');
@@ -124,4 +124,7 @@ app.get("/Increament", async ( req ,res ) => {
   res.send(incre);
 })
 
-app.listen(5000); 
+app.listen(port, ()=>{
+console.log(`app listning on port ${port}`);
+
+}); 
