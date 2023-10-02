@@ -16,25 +16,25 @@ app.use(express.json())
 
  // Import the Employee model
 
-async function getExpiredEmployees() {
-  // const currentDate = new Date();
-   const currentDate = new Date();
-  try {
-    const expiredEmployees = await userSchema.find({expiary: { $lt: currentDate } }).exec();
-    console.log('Expired employees:', expiredEmployees);
-    return expiredEmployees;
-  } catch (err) {
-    console.error(err);
-    throw err;
-  }
-}
+// async function getExpiredEmployees() {
+//   // const currentDate = new Date();
+//    const currentDate = new Date();
+//   try {
+//     const expiredEmployees = await userSchema.find({expiary: { $lt: currentDate } }).exec();
+//     console.log('Expired employees:', expiredEmployees);
+//     return expiredEmployees;
+//   } catch (err) {
+//     console.error(err);
+//     throw err;
+//   }
+// }
 
 
-app.get("/akash", async (req, res) => {
-  let find = getExpiredEmployees();
-  res.send(find);
-  // console.log(find)
-})
+// app.get("/akash", async (req, res) => {
+//   let find = getExpiredEmployees();
+//   res.send(find);
+//   // console.log(find)
+// })
 
 
 // Call the function to get expired employees
