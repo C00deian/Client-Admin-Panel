@@ -48,7 +48,7 @@ class CreateClient extends Component {
             .then((data) => {
                 // Success response - data is the parsed JSON response
                 console.log(data); // You can do something with the data if needed
-                alert('Restaurant has been added');
+                alert('Client has been added');
 
                 this.setState({
                     name: '',
