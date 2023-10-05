@@ -6,6 +6,7 @@ import {
     Link
   } from 'react-router-dom'
 import NavBarManu from './NavBarManu'
+import { BASEURL } from './constent';
 
 class ClientSearch extends Component {
     constructor() {
@@ -35,24 +36,10 @@ class ClientSearch extends Component {
             })
         })
     }
-    delete(id)
-    {
-        fetch('http://localhost:3004/restaurant/'+id,
-        {
-            method: "DELETE",
-            // headers:{
-            //     'Content-Type':'application/json'
-            // },
-        }).then((result)=>{
-            result.json().then((resp)=>{
-                alert("Client has heen Delete")
-                this.search(this.state.lastSearch)
-            })
-        })
-    }
+  
     render() {
         return (
-            <Container>
+            <>
                 <NavBarManu />
                 <h1>Client Search</h1>
                
@@ -82,7 +69,7 @@ class ClientSearch extends Component {
                                                 <td>{item.expiary}</td>
                                                 <td>{item.message}</td>
                                                 <td><Link to={"/update/"+item.id}><FontAwesomeIcon icon={faEdit} color="orange" /> </Link>
-                                                <span onClick={()=>this.delete(item.id)}><FontAwesomeIcon icon={faTrash} color="red" /> </span>
+                                                <span onClick={()=>this.delete(item.id)}><FontAwesomeIcon icon={faTrash} color="red"  /> </span>
                                                 </td>
                                             </tr>
                                     )
@@ -97,7 +84,7 @@ class ClientSearch extends Component {
                     } 
                 </div>
 
-            </Container>
+            </>
         );
     }
 }

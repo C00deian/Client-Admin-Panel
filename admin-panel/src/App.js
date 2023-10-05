@@ -7,8 +7,10 @@ import Home from "./components/Home"
 import CreateClient from "./components/CreateClient";
 import ClientDetail from "./components/ClientDetail";
 import ClientSearch from "./components/ClientSearch";
-import ClientList from "./components/ClientList"
-
+import ClientList from "./components/ClientList";
+import Login from './components/Login'
+import Logout from './components/Logout'
+import ClientUpdate from './components/ClientUpdate';
 // import Protected from './components/Protected'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
@@ -29,10 +31,10 @@ export default function App() {
     <div className="App">
     <Router>
       <Routes>
-        {/* <Route path="/logout" element={<Logout />} /> */}
+        <Route path="/logout" element={<Logout />} />
 
         {/* Use "element" prop for rendering components */}
-        {/* <Route path="/login" element={<Login />} /> */}
+        <Route path="/login" element={<Login />} />
 
         {/* Use "element" prop for rendering components */}
         <Route path="/details" element={<Protected><ClientDetail /></Protected>} />
@@ -43,7 +45,14 @@ export default function App() {
 
         {/* Use "element" prop for rendering components */}
         <Route path="/" element={<Protected><Home /></Protected>} />
+
+         {/* Other routes */}
+         <Route path="/update/:id" element={<ClientUpdate/>} />
+                {/* Define other routes here */}
+            
       </Routes>
+      
+               
     </Router>
   </div>
   )

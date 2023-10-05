@@ -1,146 +1,140 @@
-import React, { Component } from 'react'
-
-import NavBarManu from './NavBarManu'
+import React, { Component } from 'react';
+import NavBarManu from './NavBarManu';
 import { BASEURL } from './constent';
-
+// import './CreateClient.css'; // Import your CSS file
 
 class CreateClient extends Component {
+  // ... (Your constructor and other code remains the same) ...
+  constructor(props) {
 
-    constructor(props) {
+    super(props)
 
-        super(props)
+    this.state = {
 
-        this.state = {
+        name: String,
+        email: String,
+        contact: Number,
+        expiary: new Date().toDateString(),
+        selectedOption1: String,
+        selectedOption2: String,
+        selectedOption3: String,
+        selectedOption4: String,
+        selectedOption5: String,  // Add this state for the select option
+        message: String,
+    };
 
-            name: String,
-            email: String,
-            contact: Number,
-            expiary: new Date().toDateString(),
-            selectedOption1: String,
-            selectedOption2: String,
-            selectedOption3: String,
-            selectedOption4: String,
-            selectedOption5: String,  // Add this state for the select option
-            message: String,
-        };
-
-    }
+}
 
 
-    create() {
+create() {
 
-        fetch(BASEURL + 'add', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS'
+    fetch(BASEURL + 'add', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS'
 
-            },
-            body: JSON.stringify(this.state),
+        },
+        body: JSON.stringify(this.state),
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok. Status: ' + response.status);
+            }
+            return response.json();
         })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok. Status: ' + response.status);
-                }
-                return response.json();
-            })
-            .then((data) => {
-                // Success response - data is the parsed JSON response
-                console.log(data); // You can do something with the data if needed
-                alert('Client has been added');
+        .then((data) => {
+            // Success response - data is the parsed JSON response
+            console.log(data); // You can do something with the data if needed
+            alert('Client has been added');
 
-                this.setState({
-                    name: '',
-                    email: '',
-                    contact: '',
-                    expiary: new Date().toDateString(),
-                    selectedOption1: '',
-                    selectedOption2: '',
-                    selectedOption3: '',
-                    selectedOption4: '',
-                    selectedOption5: '',
-                    message: '',
-                });
-
-
-            })
-            .catch((error) => {
-                // Handle any errors that occurred during the fetch or parsing
-                console.error('Error:', error);
-                alert('Error occurred while adding restaurant: ' + error.message);
+            this.setState({
+                name: '',
+                email: '',
+                contact: '',
+                expiary: new Date().toDateString(),
+                selectedOption1: '',
+                selectedOption2: '',
+                selectedOption3: '',
+                selectedOption4: '',
+                selectedOption5: '',
+                message: '',
             });
-    }
 
 
-    render() {
-        const {
-            name,
-            email,
-            contact,
-            expiary,
-            selectedOption1,
-            selectedOption2,
-            selectedOption3,
-            selectedOption4,
-            selectedOption5,
-            message,
-        } = this.state;
-        return (
-            <div>
-                <NavBarManu />
-                <div className='Main-Section'>
-                    <h1 >Create Client</h1>
-
-
-                    <input
-                        onChange={(event) => {
-                            this.setState({ name: event.target.value });
-                        }}
-                        value={name}
-                        placeholder="Client Name"
-                    />{' '}
-
-                    <input
-                        onChange={(event) => {
-
-                            this.setState({ email: event.target.value });
-                        }}
-                        value={email}
-                        placeholder="Client Email"
-                    />{' '}
-
-                    <input
-                        onChange={(event) => {
-                            this.setState({ contact: event.target.value });
-                        }}
-                        value={contact}
-                        placeholder="Client contact"
-                    />{' '}
-
-                    <input
-
-                        type="date"
-                        onChange={(event) => {
-                            // Set the expiary value to the date input's value
-                            this.setState({ expiary: event.target.value });
-                        }}
-                        placeholder="Client expiary"
-                        value={expiary}
-                    />
-                    {' '}
-
-                    <textarea
-                        onChange={(event) => {
-
-                            this.setState({ message: event.target.value });
-                        }}
-                        value={message}
-                        placeholder="Client message"
-                    />{' '}
-
-                    <div className="custom-select">
-                        <div className="box1">
+        })
+        .catch((error) => {
+            // Handle any errors that occurred during the fetch or parsing
+            console.error('Error:', error);
+            alert('Error occurred while adding restaurant: ' + error.message);
+        });
+}
+  render() {
+    const {
+      name,
+      email,
+      contact,
+      expiary,
+      selectedOption1,
+      selectedOption2,
+      selectedOption3,
+      selectedOption4,
+      selectedOption5,
+      message,
+    } = this.state;
+    return (
+      <div>
+        <NavBarManu />
+        <div className='Main-Section'>
+          <h2>Create Client</h2>
+          <div className="form-container">
+            <div className="form-row">
+              <input
+                onChange={(event) => {
+                  this.setState({ name: event.target.value });
+                }}
+                value={name}
+                placeholder="Client Name"
+              />
+              <input
+                onChange={(event) => {
+                  this.setState({ email: event.target.value });
+                }}
+                value={email}
+                placeholder="Client Email"
+              />
+            </div>
+            <div className="form-row">
+              <input
+                onChange={(event) => {
+                  this.setState({ contact: event.target.value });
+                }}
+                value={contact}
+                placeholder="Client contact"
+              />
+              <input
+                type="date"
+                onChange={(event) => {
+                  this.setState({ expiary: event.target.value });
+                }}
+                placeholder="Client expiary"
+                value={expiary}
+              />
+            </div>
+            <div className="form-row">
+              <textarea
+                onChange={(event) => {
+                  this.setState({ message: event.target.value });
+                }}
+                value={message}
+                placeholder="Client message"
+              />
+            </div>
+            <div className="form-row">
+              <div className="custom-select">
+                {/* ... (Your select elements) ... */}
+                   <div className="box1">
                             <div className="bench">
                                 <label >Bench :</label>
                                 <select
@@ -288,16 +282,16 @@ class CreateClient extends Component {
                                 </select>
                             </div>
                         </div>
-                    </div>
-
-
-
-                    <button onClick={() => { this.create() }}>Add Client</button>
-
-                </div>
+              </div>
             </div>
-        );
-    }
+            <div className="form-row">
+              <button onClick={() => { this.create() }}>Add Client</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default CreateClient;

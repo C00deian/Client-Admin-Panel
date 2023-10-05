@@ -1,77 +1,111 @@
-import React, { Component } from 'react';
-import NavBarManu from './NavBarManu'; // Make sure to import your components
+import React, { useState } from 'react';
+import NavBarManu from './NavBarManu';
 import { BASEURL } from './constent';
+import { useParams } from 'react-router-dom';
 
-class ClientUpdate extends Component {
-    constructor() {
-        super();
-        this.state = {
-            name: '',
-            email: '',
-            expiary: '',
-            contact: '',
-            _id: '', // Correct the property name
-            message: ''
-        };
 
-        // Bind the update method to the component instance
-        this.update = this.update.bind(this);
-    }
+const ClientUpdate = () => {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [contact, setContact] = useState('');
+    const [expiary, setExpiary] = useState(new Date().toDateString());
+    const [message, setMessage] = useState('');
+    const params = useParams()
+    const update = async () => {
 
-    componentDidMount() {
-        fetch(BASEURL + this.props.match.params.id).then((response) => {
-            response.json().then((result) => {
-                console.warn(result);
-                this.setState({
-                    name: result.name,
-                    email: result.email,
-                    _id: result._id, // Correct the property name
-                    contact: result.contact,
-                    expiary: result.expiary,
-                    message: result.message
-                });
-            });
-        });
-    }
-
-    update() {
-        fetch(BASEURL + this.state._id, {
+        await fetch(`${BASEURL}update/${params.id}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS',
             },
-            body: JSON.stringify(this.state)
+            body: JSON.stringify({
+                name,
+                email,
+                contact,
+                expiary,
+                message,
+            }),
         })
-            .then((result) => result.json())
-            .then((resp) => {
-                alert('Client has been updated');
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok. Status: ' + response.status);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                console.log(data);
+                alert('Client Detail has been updated');
+
+                setName('');
+                setEmail('');
+                setContact('');
+                setExpiary(new Date().toDateString());
+                setMessage('');
             })
             .catch((error) => {
-                console.error(error);
+                console.error('Error:', error);
+                alert('Error occurred while adding restaurant: ' + error.message);
             });
-    }
+    };
 
-    render() {
-        return (
-            <div>
-                <NavBarManu />
-                <h1>Client Update</h1>
-                <div>
-                    <input onChange={(event) => { this.setState({ name: event.target.value }) }}
-                        placeholder="Client Name" value={this.state.name} /> <br /><br />
-                    <input onChange={(event) => { this.setState({ email: event.target.value }) }}
-                        placeholder="Client Email" value={this.state.email} /> <br /><br />
-                    <input onChange={(event) => { this.setState({ contact: event.target.value }) }}
-                        placeholder="Client contact" value={this.state.contact} /> <br /><br />
-                    <input onChange={(event) => { this.setState({ expiary: event.target.value }) }}
-                        placeholder="Client expiary" value={this.state.expiary} /> <br /><br />
-                    <input onChange={(event) => { this.setState({ message: event.target.value }) }}
-                        placeholder="Client message" value={this.state.message} /> <br /><br />
-                    <button onClick={this.update}>Update Client</button>
+    return (
+        <div>
+            <NavBarManu />
+            <div className="Main-Section">
+                <h2>Update Client Detail</h2>
+                <div className="form-container">
+                    <div className="form-row">
+                        <input
+                            onChange={(event) => {
+                                setName(event.target.value);
+                            }}
+                            value={name}
+                            placeholder="Client Name"
+                        />
+                        <input
+                            onChange={(event) => {
+                                setEmail(event.target.value);
+                            }}
+                            value={email}
+                            placeholder="Client Email"
+                        />
+                    </div>
+                    <div className="form-row">
+                        <input
+                            onChange={(event) => {
+                                setContact(event.target.value);
+                            }}
+                            value={contact}
+                            placeholder="Client contact"
+                        />
+                        <input
+                            type="date"
+                            onChange={(event) => {
+                                setExpiary(event.target.value);
+                            }}
+                            placeholder="Client expiary"
+                            value={expiary}
+                        />
+                    </div>
+                    <div className="form-row">
+                        <textarea
+                            onChange={(event) => {
+                                setMessage(event.target.value);
+                            }}
+                            value={message}
+                            placeholder="Client message"
+                        />
+                    </div>
+                    <div className="form-row"></div>
+                    <div className="form-row">
+                        <button onClick={update}>Update</button>
+                    </div>
                 </div>
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
 export default ClientUpdate;

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Table } from 'react-bootstrap'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee,faEdit,faTrash } from '@fortawesome/free-solid-svg-icons'
+import {faEdit,faTrash } from '@fortawesome/free-solid-svg-icons'
 import {
     Link
   } from 'react-router-dom'
@@ -38,7 +38,7 @@ class ClientList extends Component {
             // },
         }).then((result)=>{
             result.json().then((resp)=>{
-                alert("Client has heen Delete")
+                alert("Client has been  Deleted")
                 this.getData()
             })
         })
@@ -74,8 +74,9 @@ class ClientList extends Component {
                                                 <td>{item.contact}</td>
                                                 <td>{item.expiary}</td>
                                                 <td>{item.message}</td>
-                                                <td><Link to={"/update/" + item._id}>{''}<FontAwesomeIcon icon={faEdit} color="orange" />update</Link>
-                                                <span onClick={()=>this.delete(item._id)}><FontAwesomeIcon icon={faTrash} color="red"  cursor="pointer"/> </span>
+                                                <td><Link to={"/update/" + item._id}><FontAwesomeIcon icon={faEdit} color="orange" />update</Link>
+                                <div></div>
+                                                <Link onClick={()=>this.delete(item._id)}><FontAwesomeIcon icon={faTrash} color="red"  cursor="pointer"/>Delete</Link>
                                                 </td>
                                             </tr>
                                         )

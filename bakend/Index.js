@@ -67,16 +67,23 @@ app.post('/add', async(req,res)=>{
 
  
 //UPADATE YOUR DATA 
-app.put("/client/:id", async (req, res) => {
-  let data = await userSchema.findByIdAndUpdate(req.params.id,{
+app.put("/update/:id", async (req, res) => {
+ try{ let data = await userSchema.findByIdAndUpdate(req.params.id,{
      name: req.body.name,
      email:req.body.email ,
-     } )
+     contact:req.body.contact
+     } );
 
-  res.send(data);
+  res.send(data)
+
+    }
+    catch(err){
+res.status(401).send("Client not found");
+
+    }
 
 
-})
+});
 
 //DELETE YOUR DATA
 app.delete("/client/:id", async (req, res) => {
