@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require('cors')
- const port = 5000;
+const port = 5000;
 
 app.use(cors())
 const mongoose = require('mongoose');
@@ -12,9 +12,7 @@ app.use(express.json())
 
 
 
-
-
- // Import the Employee model
+// Import the Employee model
 
 // async function getExpiredEmployees() {
 //   // const currentDate = new Date();
@@ -53,10 +51,8 @@ app.use(express.json())
 
 
 
-
-
 //POST YOUR DATA INTO DB
-app.post('/add', async(req,res)=>{
+app.post('/add', async (req, res) => {
   let data = await userSchema.insertMany(req.body)
   res.send(data)
   console.log(data);
@@ -65,22 +61,23 @@ app.post('/add', async(req,res)=>{
 
 
 
- 
+
 //UPADATE YOUR DATA 
 app.put("/update/:id", async (req, res) => {
- try{ let data = await userSchema.findByIdAndUpdate(req.params.id,{
-     name: req.body.name,
-     email:req.body.email ,
-     contact:req.body.contact
-     } );
+  try {
+    let data = await userSchema.findByIdAndUpdate(req.params.id, {
+      name: req.body.name,
+      email: req.body.email,
+      contact: req.body.contact
+    });
 
-  res.send(data)
+    res.send(data)
 
-    }
-    catch(err){
-res.status(401).send("Client not found");
+  }
+  catch (err) {
+    res.status(401).send("Client not found");
 
-    }
+  }
 
 
 });
@@ -99,7 +96,7 @@ app.delete("/client/:id", async (req, res) => {
 app.get("/getAllList", async (req, res) => {
   let find = await userSchema.find()
   res.send(find);
-   // console.log(result)
+  // console.log(result)
 })
 
 
@@ -114,7 +111,7 @@ app.get("/getAllList", async (req, res) => {
 app.get("/asending", async (req, res) => {
   try {
     // let persons = await userSchema.find(req.params.id).sort('name');
-    let   persons = await userSchema.find(req.params.id).sort('age')
+    let persons = await userSchema.find(req.params.id).sort('age')
     console.log("successfully Updated")
     res.send(persons);
     console.log(persons)
@@ -125,13 +122,13 @@ app.get("/asending", async (req, res) => {
 
 
 
-app.get("/Increament", async ( req ,res ) => {
- // let incre = await userSchema.find(req.params.id).sort('age')
+app.get("/Increament", async (req, res) => {
+  // let incre = await userSchema.find(req.params.id).sort('age')
   console.log("successfully Updated")
   res.send(incre);
 })
 
-app.listen(port, ()=>{
-console.log(`app listning on port ${port}`);
+app.listen(port, () => {
+  console.log(`app listning on port ${port}`);
 
 }); 
