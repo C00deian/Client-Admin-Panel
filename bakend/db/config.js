@@ -8,7 +8,7 @@ mongoose.set('strictQuery', true);
 
 //Live Url at remote server
 try {
-  mongoose.connect("mongodb://ritik:ritik@3.111.58.65:27017/?authMechanism=DEFAULT").then(() => {
+  mongoose.connect("mongodb://ritik:ritik@3.111.58.65:2701/?authMechanism=DEFAULT").then(() => {
     console.log(`Welcome! AWS Server connected Successfully`);
 
   });
