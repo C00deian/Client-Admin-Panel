@@ -14,6 +14,7 @@ try {
   });
 } catch (err) {
   console.log("Db Not Connected yet");
+  console.log("Db Not Connected yet for test");
   console.log(err);
 
 
