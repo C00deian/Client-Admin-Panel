@@ -26,6 +26,7 @@ class CreateClient extends Component {
 }
 
 
+
 create() {
 
     fetch(BASEURL + 'add', {
@@ -70,6 +71,12 @@ create() {
             alert('Error occurred while adding restaurant: ' + error.message);
         });
 }
+
+// Function to validate an email address using the regex pattern
+// const validateEmail = (email) => {
+//   const emailRegex = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/";
+//   return emailRegex.test(email);
+// };
   render() {
     const {
       name,

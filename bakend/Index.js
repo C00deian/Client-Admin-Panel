@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require('cors')
 const port = 5000;
-
+const cron = require('node-cron');
 app.use(cors())
 const mongoose = require('mongoose');
 require("./db/config");
@@ -35,15 +35,37 @@ app.use(express.json())
 // })
 
 
-// Call the function to get expired employees
-// cron.schedule('0 10 * * *', () => {
-//   // Your cron job logic here
+//Call the function to get expired employees
+cron.schedule('* * * * *', () => {
+  const currentDate=getCurrentDate()
 
-//   const listData = getList()
-//   // console.log('Cron job running every day at 10:00 AM');
 
-//   // setInterval()
-// });
+  // Replace with the string you want to search for
+const searchString = currentDate;
+ 
+console.log(searchString);
+// Write a Mongoose query to find documents containing the string in the specified field
+userSchema.find({ "expiary": { $regex: new RegExp(searchString, 'i') } })
+  .exec()
+  .then((results) => {
+    console.log('Matching documents:', results);
+  })
+  .catch((error) => {
+    console.error('Error querying MongoDB:', error);
+  });
+}); 
+
+
+// Format the date in "YYYY-MM-DD" format
+function getCurrentDate() {
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth() + 1; // Months are 0-based, so add 1
+  const day = currentDate.getDate();
+const edate = `${day}-${month}-${year}`
+  return edate
+  
+}
 
 
 
