@@ -4,72 +4,90 @@ const cors = require('cors')
 const port = 5000;
 const cron = require('node-cron');
 app.use(cors())
+// const Employee = require('./db/employee');
+const nodemailer = require('nodemailer');
 const mongoose = require('mongoose');
 require("./db/config");
+
 const userSchema = require("./db/employee");
 // const { model } = require("mongoose");
 app.use(express.json())
 
 
 
-// Import the Employee model
-
-// async function getExpiredEmployees() {
-//   // const currentDate = new Date();
-//    const currentDate = new Date();
-//   try {
-//     const expiredEmployees = await userSchema.find({expiary: { $lt: currentDate } }).exec();
-//     console.log('Expired employees:', expiredEmployees);
-//     return expiredEmployees;
-//   } catch (err) {
-//     console.error(err);
-//     throw err;
-//   }
-// }
-
-
-// app.get("/akash", async (req, res) => {
-//   let find = getExpiredEmployees();
-//   res.send(find);
-//   // console.log(find)
-// })
-
-
 //Call the function to get expired employees
-cron.schedule('* * * * *', () => {
-  const currentDate=getCurrentDate()
+// cron.schedule('* * * * *', () => {
+//   const currentDate = getCurrentDate()
 
 
-  // Replace with the string you want to search for
-const searchString = currentDate;
- 
-console.log(searchString);
-// Write a Mongoose query to find documents containing the string in the specified field
-userSchema.find({ "expiary": { $regex: new RegExp(searchString, 'i') } })
-  .exec()
-  .then((results) => {
-    console.log('Matching documents:', results);
-  })
-  .catch((error) => {
-    console.error('Error querying MongoDB:', error);
-  });
-}); 
+//   // Replace with the string you want to search for
+//   const searchString = currentDate;
+//   console.log(`Searching for documents with expiary date: ${currentDate}`);
+//   // console.log(searchString);
+
+//   // Write a Mongoose query to find documents containing the string in the specified field
+//   userSchema.find({ "expiary": { $regex: new RegExp(searchString, 'i') } })
+//     .exec()
+//     .then((results) => {
+//       const emailData = results.map((user) => ({
+//         email: user.email,
+//         message: user.message,
+//       }))
+//       console.log('Matching documents:', results);
+//       // If there are matching documents, send an email
+//       if (results.length > 0) {
+//         const transporter = nodemailer.createTransport({
+//           service: 'gmail',
+//           auth: {
+//             user: 'ritikkumarkashyap9@gmail.com',
+//             pass: 'mojv gzjs ajbz riex', // Replace with your App Password
+//           },
+//         });
+
+//         // Email message options
+//         emailData.forEach((data) => {
+
+//           const mailOptions = {
+//             from: 'ritikkumarkashyap9@gmail.com',
+//             to: data.email,
+//             subject: 'Payment Reminder',
+//             text: data.message,
+//           };
+
+//           transporter.sendMail(mailOptions, (error, info) => {
+//             if (error) {
+//               console.error('Error sending email:', error);
+//             } else {
+//               console.log('Email sent:', info.response);
+//             }
+//           });
 
 
-// Format the date in "YYYY-MM-DD" format
+//         })
+//       }
+//     })
+//     .catch((error) => {
+//       console.error('Error querying MongoDB:', error);
+//     });
+
+
+// });
+
+
+
+
+
+
+//Format the date in "YYYY-MM-DD" format
 function getCurrentDate() {
   const currentDate = new Date();
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth() + 1; // Months are 0-based, so add 1
   const day = currentDate.getDate();
-const edate = `${day}-${month}-${year}`
+  const edate = `${day}-${month}-${year}`
   return edate
-  
+
 }
-
-
-
-
 
 
 
