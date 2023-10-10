@@ -6,7 +6,6 @@ const userSchema = new mongoose.Schema({
   message: String,
   contact: String,
   expiary: String,
- 
   selectedOption1: String,
   selectedOption2: String,
   selectedOption3: String,
