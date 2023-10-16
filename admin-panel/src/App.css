@@ -2,6 +2,13 @@
   text-align: center;
 }
 
+*{
+  padding : 0%;
+  box-sizing: border-box;
+  margin: 0%;
+
+font-family: 'Nunito', sans-serif;
+}
 
 .nav-link{
 
@@ -89,13 +96,13 @@ a {
 
 
 .custom-select{
-position: relative;
-  font-family: Arial;
-  flex-direction: column;
-    display: flex;
-    width: 100%;
-    margin: auto;
 
+  flex-direction: column;
+  display: flex;
+  margin-top: 10px;
+  align-items: center;
+  width: 100%;
+ 
 }
 
 
@@ -127,8 +134,10 @@ box-shadow: 1px 2px 5px rgba(70, 69, 69, 0.89);
 
 .Main-Section input:focus{
  outline: none !important;
-    border:1px solid rgb(0, 217, 255);
-    box-shadow: 0 0 10px  #4f95e0;
+    border:0px solid rgb(0, 217, 255);
+    box-shadow: 0 0 5px  ;
+    box-shadow: 1px 2px 5px #4f95e0;
+    
 }
 
 
@@ -136,8 +145,8 @@ box-shadow: 1px 2px 5px rgba(70, 69, 69, 0.89);
 
 .box1{
   display: flex;
-  margin: auto;
- padding: 10px;
+  flex-direction: row-reverse;
+ 
   
    
 }
@@ -175,7 +184,7 @@ height: 100px;
 
 }
 
-#selectOption1,#selectOption2 ,#selectOption3 ,#selectOption4 ,#selectOption5:focus{
+#selectOption1,#selectOption2 ,#selectOption3 ,#selectOption4 ,#selectOption5 input:focus{
 
    outline: none !important;
     border:1px solid rgb(0, 217, 255);
@@ -183,48 +192,66 @@ height: 100px;
 }
 
 
-#selectOption1,#selectOption2 ,#selectOption3 ,#selectOption4 ,#selectOption5{
-  width:215px;
-  margin: 5px;
-  padding: 8px;
-  border: none;
-  box-shadow: 1px 2px 5px rgba(70, 69, 69, 0.89);
-  border-radius: 5px;
+#selectOption1,#selectOption2 ,#selectOption3 ,#selectOption4 ,#selectOption5 {
+  width: 170px;
+    margin: 5px;
+    padding: 5px;
+    border: none;
+    box-shadow: 1px 2px 5px rgba(70, 69, 69, 0.89);
+    border-radius: 5px;
 }
 #selectOption4,#selectOption5{
   margin-left: 10px;
-  
+  margin-top: 10px;
 }
-.year{
+/* .year{
   margin-left: 40px;
-}
+} */
 
-.bench
+/* .bench
 {
 
   margin-right: 30px;
-}
-
+} */
+/* 
 .register{
   margin-left: 30px;
-}
+} */
 
 label{
 
-  font-weight: 800 !important;
+  font-weight: 700 !important;
+  padding: 5px;
 }
 button{
   padding: 8px;
-  margin-top: 20px !important;
-  width: 120px;
-  font-weight: 800 !important;
+  margin-top: 18px !important;
+  width: 100px;
+  font-weight: 700 !important;
 border-radius: 5px;
 cursor: pointer;
 border: none;
 box-shadow: 1px 2px 5px rgba(70, 69, 69, 0.89);
+background-color: aquamarine;
+}
+button:hover{
 
+  background-color: rgb(106, 248, 201);
 }
 
+.formate{
+  
+  font-size: 15px;
+  color: #8217d4;
+  
+  font-weight: 600;
+  float: right;
+  position: absolute;
+  float: right;
+  display: flex;
+  right: 21rem;
+  margin-top: -30px;
 
+}
 
 

@@ -90,6 +90,7 @@ const CreateClient = () => {
             />
           </div>
           <div className="form-row">
+          
             <input
               type="number"
               name="contact"
@@ -98,12 +99,15 @@ const CreateClient = () => {
               placeholder="Client contact"
             />
                 <input
+              
               type="text"
               name="expiary"
               value={formData.expiary}
               onChange={handleChange}
               placeholder="Client expiary"
+          
             />
+                <div className='formate'>DD/MM/YYYY</div>
           </div>
           <div className="form-row">
             <textarea
