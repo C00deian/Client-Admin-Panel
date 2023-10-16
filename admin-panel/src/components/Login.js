@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
-import NavBarManu from './NavBarManu'
+import NavBarManu from './NavBarManu';
 class Login extends Component {
     constructor() {
         super();
@@ -19,7 +19,7 @@ class Login extends Component {
                     console.warn(this.props.history.push('list'))
                 }
                 else {
-                    alert("Pelase check username and password")
+                    alert("Please check username and password")
                 }
 
             })

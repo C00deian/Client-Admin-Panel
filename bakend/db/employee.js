@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
   name: String,
   email: String,
   message: String,
-  contact: String,
+  mobileNo: String,
   expiary: String,
   selectedOption1: String,
   selectedOption2: String,

@@ -16,14 +16,6 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 
 
 
-// Define the Protected component to handle authentication logic
-function Protected({ children }) {
-  // Add your authentication logic here
-  // For example, you can check if the user is authenticated, and if not, redirect to the login page
-  // For simplicity, we'll just render the children directly
-  return children;
-}
-
 
 export default function App() {
 
@@ -37,14 +29,14 @@ export default function App() {
         <Route path="/login" element={<Login />} />
 
         {/* Use "element" prop for rendering components */}
-        <Route path="/details" element={<Protected><ClientDetail /></Protected>} />
+        <Route path="/details" element={<ClientDetail />} />
         {/* <Route path="/update/:id" element={<Protected><CLientUpdate /></Protected>} /> */}
-        <Route path="/search" element={<Protected><ClientSearch /></Protected>} />
-        <Route path="/create" element={<Protected><CreateClient /></Protected>} />
-        <Route path="/list" element={<Protected><ClientList /></Protected>} />
+        <Route path="/search" element={<ClientSearch />} />
+        <Route path="/create" element={<CreateClient />} />
+        <Route path="/list" element={<ClientList />} />
 
         {/* Use "element" prop for rendering components */}
-        <Route path="/" element={<Protected><Home /></Protected>} />
+        <Route path="/" element={<Home />} />
 
          {/* Other routes */}
          <Route path="/update/:id" element={<ClientUpdate/>} />
