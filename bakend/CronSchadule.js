@@ -5,12 +5,12 @@ const nodemailer = require('nodemailer');
 const userSchema = require("./db/employee");
 
 
-var iscronStart = 1;//only testing purpose
-// //Call the function to get expired employees
+var iscronStart = 0;  //only testing purpose
+//Call the function to get expired employees
 cron.schedule('* * * * *', () => {
 
     if (iscronStart == 0) {
-        console.log("cron is not running.");
+        // console.log("cron is not running.");
         return
     }
 
@@ -88,7 +88,7 @@ async function SendWhatsApp(mobileNo) {
         // Define the data you want to send to the third-party API
         const postData = {
             "messaging_product": "whatsapp",
-            "to": "917488692832",
+            "to": "919711812800",
             "type": "template",
             "template": {
                 "name": "hello_world",
@@ -100,7 +100,7 @@ async function SendWhatsApp(mobileNo) {
         };
 
         // Replace 'YOUR_BEARER_TOKEN' with your actual token
-        const bearerToken = 'EAAhHPkkcTVUBO3DfuheT8LmRAULaXwRlthIwlOC9pQKYQMg8FBwSsuzPatwZCduAiN4zfUmXRDt52q5Tw0cuPMZCPaQqIaY8lyVt667pJtZAkBG2dsIl3ATduYVgCIYgIkuEmm7SfI5PswlSMYvAlVZAt98xsHV2HP0R4ikPlNMBAmyK2p5aLlVgUBAZBou4ZBRyZAwicSBzWznlRRWNI4ZD';
+        const bearerToken = 'EAAEf48MREagBOZB6Hr7yJtGv8Sf4klPpPXmZAAT1uubqn87YgGHLO3kD6ZBhupBb9DqqO52DAlNPj4N4iV4VGYSdi1z9nABGPvEZBClsEfAFutvrL2dWFb5L3XO8klJTkVFfB73UG7DtUCznknB5qpQQhWxpTLv7F17FEwdj1qIracKlvpthyQGKCersDX92ZCXTJGWjIZCJX2HZBi5l80ZD';
 
         // Define the headers object with the Authorization header
         const headers = {
