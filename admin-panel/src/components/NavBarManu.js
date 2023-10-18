@@ -8,6 +8,8 @@ const MyNavbar = () => {
   const isLoggedIn = localStorage.getItem('login');
 
   return (
+
+    
     <Navbar bg="light" expand="lg">
       <Navbar.Brand className='navbar-brand'>
       <Link  to="/">
@@ -30,6 +32,7 @@ const MyNavbar = () => {
             <FontAwesomeIcon icon={faSearch} /> Search
           </Nav.Link>
           <Nav.Link as={Link} to={isLoggedIn ? '/logout' : '/login'}>
+            
             <FontAwesomeIcon icon={faUser} /> {isLoggedIn ? 'Logout' : 'Login'}
           </Nav.Link>
         </Nav>

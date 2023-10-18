@@ -2,10 +2,10 @@ const axios = require('axios')
 const cron = require('node-cron');
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
-const userSchema = require("./db/employee");
+const userSchema = require("./Model/employee");
 
 
-var iscronStart = 1;  //only testing purpose
+var iscronStart = 0;  //only testing purpose
 //Call the function to get expired employees
 cron.schedule('* * * * *', () => {
 

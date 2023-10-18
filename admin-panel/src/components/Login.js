@@ -1,50 +1,62 @@
-import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import NavBarManu from './NavBarManu';
-class Login extends Component {
-    constructor() {
-        super();
-        this.state = {
-            name: '',
-            password: ''
-        }
-    }
-    login() {
-        console.warn(this.state)
-        fetch("http://localhost:3000/login?q=" + this.state.name).then((data) => {
-            data.json().then((resp) => {
-                console.warn("resp", resp)
-                if (resp.length > 0) {
-                    localStorage.setItem('login',JSON.stringify(resp))
-                    console.warn(this.props.history.push('list'))
-                }
-                else {
-                    alert("Please check username and password")
-                }
 
-            })
-        })
-    }
-    render() {
-        return (
+function Login() {
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-            
-            <div >
-                <NavBarManu />
-                <div className='Main-Section'> 
-             
-                <input type="text"
-                    placeholder="enter name"
-                    name="user" onChange={(event) => this.setState({ name: event.target.value })} /> <br /> <br />
-                <input
-                    placeholder="enter password"
-                    type="password" name="password" onChange={(event) => this.setState({ password: event.target.value })} /> <br /> <br />
-                <button onClick={() => { this.login() }} >Login</button>
+  const login = async () => {
+    try {
+      // Replace this with your actual authentication endpoint URL.
+      const response = await  fetch(("http://localhost:5000/login?q=" + name) ,{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, password }),
+      });
 
-                </div>
-            </div>
-        );
+      if (response.status === 200) {
+        const data = await response.json();
+        localStorage.setItem('login', JSON.stringify(data));
+        navigate('/list'); // Redirect to the 'list' page after successful login.
+      } else if (response.status === 401) {
+        alert("Authentication failed. Please check your username and password.");
+      } else {
+        // Handle other error cases as needed.
+        alert("An error occurred. Please try again later.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
+  };
+
+  return (
+    <div>
+      <NavBarManu />
+
+      <div className='Main-Section'>
+      <h2>Sign in</h2>
+        <input
+          type="text"
+          placeholder="enter name"
+          name="user"
+          value={name}
+          onChange={(event) => setName(event.target.value)}
+        /> <br /> <br />
+        <input
+          placeholder="enter password"
+          type="password"
+          name="password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+        /> <br /> <br />
+        <button onClick={login}>Signin</button>
+      </div>
+    </div>
+  );
 }
 
 export default Login;

@@ -10,6 +10,13 @@
 font-family: 'Nunito', sans-serif;
 }
 
+h2 {
+  margin-top: 15px !important;
+  margin-bottom: 5px !important;
+  font-weight: 500;
+ 
+}
+
 .nav-link{
 
   margin-top: -25px  !important;
@@ -126,7 +133,7 @@ box-shadow: 1px 2px 5px rgba(70, 69, 69, 0.89);
   border: none;
   display: block;
   margin: auto;
-  margin-top: 15px;
+  margin-bottom: 13px;
 text-align: center;
 box-shadow: 1px 2px 5px rgba(70, 69, 69, 0.89);
 
@@ -249,8 +256,8 @@ button:hover{
   position: absolute;
   float: right;
   display: flex;
-  right: 21rem;
-  margin-top: -30px;
+  right: 20rem;
+  margin-top: -44px;
 
 }
 
