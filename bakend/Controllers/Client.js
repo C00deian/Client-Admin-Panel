@@ -21,8 +21,6 @@ const GetAllList = async (req, res) => {
 
 //Find One  Client 
 const FindOneClientList = async (req, res) => {
-
-
     let find = await userSchema.findone()
     res.send(find);
     // console.log(result)
@@ -35,17 +33,24 @@ const FindOneClientList = async (req, res) => {
 const UpdateClientDetails = async (req, res) => {
 
     try {
-        let data = await userSchema.findByIdAndUpdate(req.params.id, {
+         await userSchema.findByIdAndUpdate(req.params.id, {
             name: req.body.name,
             email: req.body.email,
-            contact: req.body.contact
+            contact: req.body.mobileNo,
+            expiary: req.body.expiary,
+            message: req.body.message,
+            selectedOption1: req.body.selectedOption1,
+            selectedOption2: req.body.selectedOption2,
+            selectedOption3: req.body.selectedOption3,
+            selectedOption4: req.body.selectedOption4,
+            selectedOption5: req.body.selectedOption5,
         });
 
-        res.send(data)
+        res.status(201).json({ message: "client Detail has been updated."});
 
     }
     catch (err) {
-        res.status(401).send("Client not found");
+        res.status(401).send("Client Detail  not found");
 
     }
 
