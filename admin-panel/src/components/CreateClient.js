@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import NavBarManu from './NavBarManu';
 import { BASEURL } from './constent';
-import moment from 'moment';
 
 
 const CreateClient = () => {
@@ -9,7 +8,7 @@ const CreateClient = () => {
     name: '',
     email: '',
     contact: '',
-    expiary: moment().subtract(10, 'days').calendar(),
+    expiary:'',
     selectedOption1: '',
     selectedOption2: '',
     selectedOption3: '',
@@ -48,6 +47,8 @@ const CreateClient = () => {
       .then((data) => {
         console.log(data);
         alert('Client has been added');
+
+        //when data has been save to DB form field  has been Blanked Automatically
         setFormData({
           name: '',
           email: '',
@@ -269,7 +270,7 @@ const CreateClient = () => {
            
           </div>
           <div className="form-row">
-            <button onClick={create}>Add Client</button>
+            <button onClick={create}>Ad d Client</button>
           </div>
         </div>
       </div>

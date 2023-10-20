@@ -31,25 +31,15 @@ const FindOneClientList = async (req, res) => {
 
 //UPADATE YOUR DATA 
 const UpdateClientDetails = async (req, res) => {
-
+const id = req.params.id
     try {
-         await userSchema.findByIdAndUpdate(req.params.id, {
-            name: req.body.name,
-            email: req.body.email,
-            contact: req.body.mobileNo,
-            expiary: req.body.expiary,
-            message: req.body.message,
-            selectedOption1: req.body.selectedOption1,
-            selectedOption2: req.body.selectedOption2,
-            selectedOption3: req.body.selectedOption3,
-            selectedOption4: req.body.selectedOption4,
-            selectedOption5: req.body.selectedOption5,
-        });
+         await userSchema.findOneAndUpdate({_id:id }, req.body,{new:true})
+         res.status(201).json({ message: "client Detail has been updated."});
+        }
 
-        res.status(201).json({ message: "client Detail has been updated."});
-
-    }
+    
     catch (err) {
+        console.log(err);
         res.status(401).send("Client Detail  not found");
 
     }
@@ -58,10 +48,9 @@ const UpdateClientDetails = async (req, res) => {
 
 
 //DELETE YOUR DATA
-
 const RemoveClient = async (req, res) => {
-
-    let data = await userSchema.findByIdAndDelete(req.params.id)
+id = req.params.id;
+    let data = await userSchema.findByIdAndDelete(id);
     res.send(data);
 }
 

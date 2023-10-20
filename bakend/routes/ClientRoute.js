@@ -6,7 +6,7 @@ const ClientController = require('../Controllers/Client')
 router
 .post('/add', ClientController.CreateClient)
 .put("/update/:id", ClientController.UpdateClientDetails)
-.delete("/client/:id", ClientController.RemoveClient)
+.delete("/delete/:id", ClientController.RemoveClient)
 .get("/getAllList", ClientController.GetAllList)
 .get("/findone", ClientController.FindOneClientList);
 

@@ -30,14 +30,14 @@ class ClientList extends Component {
     delete(id)
 
     {
-        fetch(BASEURL +`client/${id}`,
+        fetch(BASEURL +`delete/${id}`,
         {
             method: "DELETE",
             // headers:{
             //     'Content-Type':'application/json'
             // },
         }).then((result)=>{
-            result.json().then((resp)=>{
+            result.json().then(( resp)=>{
                 alert("Client has been  Deleted")
                 this.getData()
             })
