@@ -7,7 +7,7 @@ router
 .post('/add', ClientController.CreateClient)
 .put("/update/:id", ClientController.UpdateClientDetails)
 .delete("/delete/:id", ClientController.RemoveClient)
-.get("/getAllList", ClientController.GetAllList)
-.get("/findone", ClientController.FindOneClientList);
+.get("/getAllList", ClientController.GetAllClientList)
+.get("/update/:id", ClientController.FindOneClientList);
 
 exports.router = router ;

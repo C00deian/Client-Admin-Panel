@@ -11,33 +11,47 @@ const CreateClient = async (req, res) => {
 
 
 //FETCH ALL YOUR DATA
-const GetAllList = async (req, res) => {
-    let find = await userSchema.find()
-    res.send(find);
-    // console.log(result)
+const GetAllClientList = async (req, res) => {
+    try {
+        let find = await userSchema.find()
+        res.send(find);
 
+    }
+    catch (err) {
+        console.log(err);
+        res.send({ Result: "Clients List Not Found" });
+
+    }
 }
 
-
-//Find One  Client 
+//Find One Client Data
 const FindOneClientList = async (req, res) => {
-    let find = await userSchema.findone()
-    res.send(find);
-    // console.log(result)
-}
+    const id = req.params.id
 
+    try {
+        const result = await userSchema.findOne({ _id: id }, req.body, { new: true })
+        res.send(result);
+    }
+
+    catch (err) {
+        console.log(err);
+        res.send({ Result: "Client Record not found" });
+
+    }
+}
 
 
 
 //UPADATE YOUR DATA 
 const UpdateClientDetails = async (req, res) => {
-const id = req.params.id
-    try {
-         await userSchema.findOneAndUpdate({_id:id }, req.body,{new:true})
-         res.status(201).json({ message: "client Detail has been updated."});
-        }
+    const id = req.params.id
 
-    
+    try {
+        await userSchema.findOneAndUpdate({ _id: id }, req.body, { new: true })
+        res.status(201).json({ message: "client Detail has been updated." });
+    }
+
+
     catch (err) {
         console.log(err);
         res.status(401).send("Client Detail  not found");
@@ -49,7 +63,7 @@ const id = req.params.id
 
 //DELETE YOUR DATA
 const RemoveClient = async (req, res) => {
-id = req.params.id;
+    id = req.params.id;
     let data = await userSchema.findByIdAndDelete(id);
     res.send(data);
 }
@@ -57,7 +71,7 @@ id = req.params.id;
 module.exports = {
 
     CreateClient,
-    GetAllList,
+    GetAllClientList,
     UpdateClientDetails,
     RemoveClient,
     FindOneClientList

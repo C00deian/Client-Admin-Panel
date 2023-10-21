@@ -7,7 +7,7 @@ const CreateClient = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    contact: '',
+    mobileNo: '',
     expiary:'',
     selectedOption1: '',
     selectedOption2: '',
@@ -48,11 +48,11 @@ const CreateClient = () => {
         console.log(data);
         alert('Client has been added');
 
-        //when data has been save to DB form field  has been Blanked Automatically
+       //when Data has been Store to DB  The Field of Form  will be blanked automatically.
         setFormData({
           name: '',
           email: '',
-          contact: '',
+          mobileNo: '',
           expiary: '',
           selectedOption1: '',
           selectedOption2: '',
@@ -94,9 +94,9 @@ const CreateClient = () => {
           
             <input
               type="number"
-              name="contact"
+              name="mobileNo"
               onChange={handleChange}
-              value={formData.contact}
+              value={formData.mobileNo}
               placeholder="Client contact"
             />
                 <input
