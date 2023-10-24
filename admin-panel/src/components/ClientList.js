@@ -82,7 +82,7 @@ function ClientList() {
                     </Table>
                 </div>
             ) : (
-                <p>Please Wait...</p>
+                <p>Please Wait....</p>
             )}
         </div>
     );

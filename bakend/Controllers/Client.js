@@ -68,7 +68,7 @@ const RemoveClient = async (req, res) => {
     res.send(data);
 }
 
-module.exports = {
+module.exports = { 
 
     CreateClient,
     GetAllClientList,

@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 
 
 const userSchema = new mongoose.Schema({
-  name: String,
-  email: String,
+  name: { type: String , required:true},
+  email: { type: String, unique: true, required: [true, "This Field is required"] },
   message: String,
   mobileNo: String,
   expiary: String,
@@ -13,16 +13,10 @@ const userSchema = new mongoose.Schema({
   selectedOption3: String,
   selectedOption4: String,
   selectedOption5: String,
-
-
-
-
-
-
   is_Payment: { type: Boolean, default: false }
 });
 
 
 
 
-module.exports = mongoose.model("employee", userSchema);
+module.exports = mongoose.model("client", userSchema);

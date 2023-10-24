@@ -5,7 +5,7 @@ class Home extends Component {
         return (
             <div>
                 <NavBarManu />
-                <h1>Home</h1>
+                <h1>Welcome To Home Page....</h1>
             </div>
         );
     }

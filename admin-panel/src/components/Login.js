@@ -21,7 +21,9 @@ function Login() {
       if (response.status === 200) {
         const data = await response.json();
         localStorage.setItem('login', JSON.stringify(data));
-        navigate('/list'); // Redirect to the 'list' page after successful login.
+        navigate('/list'); 
+        
+      // Redirect to the 'list' page after successful login.
       } else if (response.status === 401) {
         alert("Authentication failed. Please check your username and password.");
       } else {
@@ -41,13 +43,13 @@ function Login() {
       <h2>Sign in</h2>
         <input
           type="text"
-          placeholder="enter name"
+          placeholder="Enter Name"
           name="user"
           value={name}
           onChange={(event) => setName(event.target.value)}
         /> <br /> <br />
         <input
-          placeholder="enter password"
+          placeholder="Enter Password"
           type="password"
           name="password"
           value={password}

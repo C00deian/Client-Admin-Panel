@@ -270,7 +270,7 @@ const CreateClient = () => {
            
           </div>
           <div className="form-row">
-            <button onClick={create}>Ad d Client</button>
+            <button onClick={create}>Add Client</button>
           </div>
         </div>
       </div>

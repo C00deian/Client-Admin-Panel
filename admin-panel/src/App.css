@@ -118,7 +118,7 @@ a {
   border: none;
   margin: auto;
   width: 70%;
-  height: 550px;
+  height: 520px;
 display: block;
 border-radius: 10px;
 box-shadow: 1px 2px 5px rgba(70, 69, 69, 0.89);
@@ -133,7 +133,7 @@ box-shadow: 1px 2px 5px rgba(70, 69, 69, 0.89);
   border: none;
   display: block;
   margin: auto;
-  margin-bottom: 13px;
+  margin-bottom: 10px;
 text-align: center;
 box-shadow: 1px 2px 5px rgba(70, 69, 69, 0.89);
 
@@ -232,7 +232,7 @@ label{
 }
 button{
   padding: 8px;
-  margin-top: 18px !important;
+  margin-top: 12px !important;
   width: 100px;
   font-weight: 700 !important;
 border-radius: 5px;

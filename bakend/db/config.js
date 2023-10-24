@@ -2,13 +2,14 @@ const mongoose = require('mongoose');
 mongoose.set('strictQuery', true);
 
 //Development Url at local host
-mongoose.connect("mongodb://127.0.0.1:27017/employee").then(() => {
+mongoose.connect(process.env.MONGO_URL).then(() => {
   console.log(`Welcome! MongoDb connected Successfully `);
 });
 
+
 //Live Url at remote server
 //  try {
-//   mongoose.connect("mongodb+srv://shashi:shashi@cluster0.wbpxfqm.mongodb.net/?retryWrites=true&w=majority").then(() => {
+//   mongoose.connect(process.env.BASE_URL).then(() => {
 
 //   console.log(`SHASHI'S SERVER Connected Successfully`);
 // });
