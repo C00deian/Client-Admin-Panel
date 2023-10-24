@@ -8,7 +8,6 @@ import Home from "./components/Home"
 // import CLientUpdate from "./components/CLientUpdate";
 import CreateClient from "./components/CreateClient";
 import ClientDetail from "./components/ClientDetail";
-import ClientSearch from "./components/ClientSearch";
 import ClientList from "./components/ClientList";
 import Login from './components/Login'
 import Logout from './components/Logout'
@@ -38,7 +37,6 @@ export default function App() {
         {/* Use "element" prop for rendering components */}
         <Route path="/details" element={<ClientDetail />} />
         {/* <Route path="/update/:id" element={<Protected><CLientUpdate /></Protected>} /> */}
-        <Route path="/search" element={<ClientSearch />} />
         <Route path="/create" element={<CreateClient />} />
         <Route path="/list" element={<ClientList />} />
 

@@ -28,9 +28,7 @@ const MyNavbar = () => {
           <Nav.Link as={Link} to="/create">
             <FontAwesomeIcon icon={faPlus} /> Create
           </Nav.Link>
-          <Nav.Link as={Link} to="/search">
-            <FontAwesomeIcon icon={faSearch} /> Search
-          </Nav.Link>
+        
           <Nav.Link as={Link} to={isLoggedIn ? '/logout' : '/login'}>
             
             <FontAwesomeIcon icon={faUser} /> {isLoggedIn ? 'Logout' : 'Login'}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Table } from 'react-bootstrap';
+// import { Table } from 'react-bootstrap';
+import { Table, Form, Container } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
@@ -19,6 +20,34 @@ function ClientList() {
             });
         });
     };
+
+
+
+    //Search CLient Data
+    const HandleSearch = async (event) => {
+
+        let key = event.target.value
+        if (key) {
+            let result = await fetch(BASEURL + `search/${key}`,)
+            result = await result.json()
+            if (result) {
+
+                setFormData(result)
+
+            }
+        } else {
+
+            getAllClientData();
+        }
+
+
+    }
+   
+    
+
+
+
+
 
 
     const deleteItem = (id) => {
@@ -44,6 +73,8 @@ function ClientList() {
         <div>
             <NavBarManu />
             <h1>Client List</h1>
+            <Form.Control type="text" onChange={HandleSearch} placeholder="Search Client" />
+
             {formData ? (
                 <div>
                     <Table striped bordered hover>
@@ -59,7 +90,11 @@ function ClientList() {
                             </tr>
                         </thead>
                         <tbody>
-                            {formData.map((item, index) => (
+
+
+                            {
+
+                           formData.map((item, index) => (
                                 <tr key={item._id}>
                                     <td>{index + 1}</td>
                                     <td>{item.name}</td>
@@ -77,7 +112,9 @@ function ClientList() {
                                         </Link>
                                     </td>
                                 </tr>
-                            ))}
+                            ))
+                            
+                            }
                         </tbody>
                     </Table>
                 </div>
