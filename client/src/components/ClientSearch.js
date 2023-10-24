@@ -53,7 +53,7 @@ class ClientSearch extends Component {
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
-                                        <th>contact</th>
+                                        <th>mobileNo</th>
                                         <th>Expiary Date</th>
                                      <th>Message</th> 
                                         <th>Operation</th>
@@ -65,7 +65,7 @@ class ClientSearch extends Component {
                                 <tr>
                                                 <td>{item.id}</td>
                                                 <td>{item.name}</td>
-                                                <td>{item.contact}</td>
+                                                <td>{item.mobileNo}</td>
                                                 <td>{item.expiary}</td>
                                                 <td>{item.message}</td>
                                                 <td><Link to={"/update/"+item.id}><FontAwesomeIcon icon={faEdit} color="orange" /> </Link>

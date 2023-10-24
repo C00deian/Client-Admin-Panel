@@ -24,6 +24,7 @@ const GetAllClientList = async (req, res) => {
     }
 }
 
+
 //Find One Client Data
 const FindOneClientList = async (req, res) => {
     const id = req.params.id
@@ -42,13 +43,14 @@ const FindOneClientList = async (req, res) => {
 
 
 
+
 //UPADATE YOUR DATA 
 const UpdateClientDetails = async (req, res) => {
     const id = req.params.id
 
     try {
         await userSchema.findOneAndUpdate({ _id: id }, req.body, { new: true })
-        res.status(201).json({ message: "client Detail has been updated." });
+        res.status(201).json({ message: "Client Detail has been updated." });
     }
 
 
@@ -61,6 +63,7 @@ const UpdateClientDetails = async (req, res) => {
 }
 
 
+
 //DELETE YOUR DATA
 const RemoveClient = async (req, res) => {
     id = req.params.id;
@@ -68,11 +71,36 @@ const RemoveClient = async (req, res) => {
     res.send(data);
 }
 
-module.exports = { 
+
+
+//SEARCH YOUR DATA
+const SearchClient = async (req, res) => {
+
+    let result = await userSchema.find({
+
+        "$or": [
+
+            {
+                name: { $regex: req.params.key },
+            },
+            {
+                mobileNo: { $regex: req.params.key },
+            }
+        ]
+    });
+
+    res.send(result);
+    // res.status(201).json({ message: "client Detail has been updated." });
+
+}
+
+module.exports = {
 
     CreateClient,
     GetAllClientList,
     UpdateClientDetails,
     RemoveClient,
-    FindOneClientList
+    FindOneClientList,
+    SearchClient
+
 }
