@@ -88,13 +88,7 @@ export const Signin = () => {
                   value={AdminData.password}
                   placeholder="Password"
                 />
-                {/* <input
-                  type="text"
-                  name="cpassword"
-                  onChange={handleChange}
-                  value={AdminData.cpassword}
-                  placeholder="Confirm Password"
-                /> */}
+           
               </div>
         
     

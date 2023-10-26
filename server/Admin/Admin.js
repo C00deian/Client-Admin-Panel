@@ -42,8 +42,9 @@ adminSchema.methods.generateAuthToken = async function () {
   
   }
 
+  //collection creation
 const Admin = mongoose.model('Admin', adminSchema);
 
 module.exports = Admin;
 
-//collection creation
+

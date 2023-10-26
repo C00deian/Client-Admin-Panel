@@ -2,10 +2,10 @@ import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle, faHome, faList, faPlus, faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faUserCircle, faHome, faList, faPlus,  faUser,  faLock,  } from '@fortawesome/free-solid-svg-icons';
 
 const MyNavbar = () => {
-  const isLoggedIn = localStorage.getItem('login');
+
 
   return (
 
@@ -28,10 +28,11 @@ const MyNavbar = () => {
           <Nav.Link as={Link} to="/create">
             <FontAwesomeIcon icon={faPlus} /> Create
           </Nav.Link>
-        
-          <Nav.Link as={Link} to={isLoggedIn ? '/logout' : '/login'}>
-            
-            <FontAwesomeIcon icon={faUser} /> {isLoggedIn ? 'Logout' : 'Login'}
+          <Nav.Link as={Link} to="/signup">
+            <FontAwesomeIcon icon={faUser} />Registration
+          </Nav.Link>
+          <Nav.Link as={Link} to="/login">
+            <FontAwesomeIcon icon={faLock} /> Signin
           </Nav.Link>
         </Nav>
       </Navbar.Collapse>

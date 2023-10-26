@@ -11,4 +11,10 @@ router
 .get("/update/:id", ClientController.FindOneClientList)
 .get("/search/:key", ClientController.SearchClient);
 
+
+//admin-register
+router
+.post('/admin-register', ClientController.AdminRegister)
+.post('/admin-login', ClientController.AdminLogin)
+
 exports.router = router ;

@@ -52,7 +52,7 @@ const {username,Email,password,cpassword } = AdminData
         // Successful login
         // dispatch({ type: 'USER', payload: true });
         window.alert(data.message || " Registered Successfully");
-        navigate('/Signin');
+        navigate('/login');
       } else {
         console.error('An error occurred during Registration:', data);
         window.alert(data.error || 'An error occurred during Login. Please try again later.');
