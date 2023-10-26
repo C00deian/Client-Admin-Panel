@@ -7,6 +7,7 @@ const userSchema = require("../Model/employee");
 
 var iscronStart = 0;  //only testing purpose
 //Call the function to get expired employees
+
 cron.schedule('* * * * *', () => {
 
     if (iscronStart == 0) {
@@ -16,12 +17,17 @@ cron.schedule('* * * * *', () => {
 
     else {
 
+       
+        // sendMessage("hii ritik", 6393654550) static data Only for Testing purpose
+
+
 
         const currentDate = getCurrentDate()
 
-        SendWhatsApp(777)
+        // SendWhatsApp(777)
 
-        //   // Replace with the string you want to search for
+
+        // Replace with the string you want to search for
         const searchString = currentDate;
         console.log(`Searching for documents with expiary date: ${currentDate}`);
         // console.log(searchString);
@@ -33,7 +39,9 @@ cron.schedule('* * * * *', () => {
                 const emailData = results.map((user) => ({
                     email: user.email,
                     message: user.message,
+                    mobileNo: user.mobileNo
                 }))
+
                 console.log('Matching documents:', results);
 
 
@@ -55,7 +63,11 @@ cron.schedule('* * * * *', () => {
                             to: data.email,
                             subject: 'Payment Reminder',
                             text: data.message,
+
                         };
+
+                        //call the function to Trigger message and email to the Expire Client
+                        sendMessage(data.message, data.mobileNo)
 
                         transporter.sendMail(mailOptions, (error, info) => {
                             if (error) {
@@ -69,6 +81,9 @@ cron.schedule('* * * * *', () => {
 
                     })
                 }
+                else {
+                    console.log("No Data Matched With DB");
+                }
             })
             .catch((error) => {
                 console.error('Error querying MongoDB:', error);
@@ -80,7 +95,43 @@ cron.schedule('* * * * *', () => {
 
 
 
-//Whats App API Schaduling
+//Whats App API key  Provided by kk
+function sendMessage(message, mobilenumber) {
+
+    const WapiKey = process.env.WhatsAppApiKey
+
+
+    const whatsappApiUrl = `https://api.bulkcampaigns.com/api/wapi/?json=true&apikey=${WapiKey}&mobile=${mobilenumber}&msg=${message}`;
+
+    // Make the GET request
+    axios.get(whatsappApiUrl).then((response) => {
+
+        // Handle the API response here
+        console.log('Message Sent Successfully:', response.data);
+    })
+        .catch((error) => {
+            // Handle any errors that occur during the request
+            console.error('Error:', error);
+        });
+
+
+
+}
+
+
+//Format the date in "YYYY-MM-DD" format
+function getCurrentDate() {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth() + 1; // Months are 0-based, so add 1
+    const day = currentDate.getDate();
+    const edate = `${day}/${month}/${year}`
+    return edate
+
+}
+
+
+//Whats App API Provided by KAMENDRA BRO..
 
 async function SendWhatsApp(mobileNo) {
 
@@ -97,7 +148,7 @@ async function SendWhatsApp(mobileNo) {
                 }
             }
 
-        };
+        }
 
         // Replace 'YOUR_BEARER_TOKEN' with your actual token
         const bearerToken = 'EAANuQX9U2lIBOZC7M3X64ZB87MGvjGkItT7lIEYsDzHGDGwD9FgZCj9ZAXbiQwJZARWpL9bh65ZCkDpcdOCG8YDKyfGVedaSKZBMdyVMtPG7o2mPXmBGRhrkaP3SAADqyWSQnmzTQAGcmvP5sAsmHrDW3olwYou6ZCxUDzK9mN2WQoThpnviqJAGH0VkZBTOBNBQbr8SQo8ey2SX5bqU9V8pd6AZDZD';
@@ -119,17 +170,5 @@ async function SendWhatsApp(mobileNo) {
     } catch (error) {
         console.log("error", error)
     }
-
-}
-
-
-//Format the date in "YYYY-MM-DD" format
-function getCurrentDate() {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth() + 1; // Months are 0-based, so add 1
-    const day = currentDate.getDate();
-    const edate = `${day}/${month}/${year}`
-    return edate
 
 }
