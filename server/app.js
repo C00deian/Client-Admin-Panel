@@ -1,6 +1,7 @@
 const express = require("express");
 require('dotenv').config()
 const app = express();
+const path = require('path');
 const cors = require('cors')
 require("./db/config");
 require('./cron/cron');
@@ -16,7 +17,11 @@ const port = process.env.PORT;
 app.use(cors())
 app.use(express.json())
 app.use('/', ClientRouter.router);
+app.use(express.static(path.resolve(__dirname, process.env.PUBLIC_DIR)))
+app.use('*', (req, res) => {
 
+  res.sendFile(path.resolve(__dirname, 'build', 'index.html'))
+})
 
 
 
