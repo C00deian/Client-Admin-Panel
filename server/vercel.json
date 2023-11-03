@@ -1,16 +1,49 @@
 {
- 
+    "name": "my-vercel-project",
+    "version": 2,
     "builds": [
       {
-        "src": "index.js",
+        "src": "package.json",
         "use": "@vercel/node"
       }
     ],
     "routes": [
+        {
+            "src": "/api/add",
+            "dest": "/backend/Controllers/Client.js"
+          },
+          {
+            "src": "/api/update/:id",
+            "dest": "/backend/Controllers/Client.js"
+          },
+          {
+            "src": "/api/delete/:id",
+            "dest": "/backend/Controllers/Client.js"
+          },
+          {
+            "src": "/api/getAllList",
+            "dest": "/backend/Controllers/Client.js"
+          },
+          {
+            "src": "/api/update/:id",
+            "dest": "/backend/Controllers/Client.js"
+          },
+          {
+            "src": "/api/search/:key",
+            "dest": "/backend/Controllers/Client.js"
+          },
       {
-    
         "src": "/(.*)",
-        "dest": "index.js"
+        "dest": "/$1"
       }
-    ]
+    ],
+    "env": {
+      "API_KEY": "your-api-key",
+      "ANOTHER_ENV_VAR": "another-value",
+      "BASE_URL": "@BASE_URL",
+      "PORT": "@PORT",
+      "PUBLIC_DIR": "@PUBLIC_DIR",
+      "WhatsAppApiKey": "@WhatsAppApiKey"
+    }
   }
+  
