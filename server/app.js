@@ -7,6 +7,9 @@ require("./db/config");
 require('./cron/cron');
 
 const ClientRouter = require('./routes/ClientRoute')
+server.get('/favicon.ico', (req, res) => (
+  res.status(200).sendFile('favicon.ico', {root: __dirname + '/static/'})
+));
 
 
 //PORT
