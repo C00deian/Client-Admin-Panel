@@ -16,10 +16,11 @@ const port = process.env.PORT;
 //body parser
 app.use(cors())
 app.use(express.json())
-app.use('/', ClientRouter.router);
+app.use('/Clients', ClientRouter.router);
 app.use(express.static(path.resolve(__dirname, process.env.PUBLIC_DIR)))
-app.use('*', (req, res) => {
 
+
+app.use('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'build', 'index.html'))
 })
 
