@@ -6,7 +6,7 @@ const ClientController = require('../Controllers/Client')
 router
     .post('/', ClientController.CreateClient)
     .get('/', ClientController.GetAllClientList)
-    .put('/:id', ClientController.UpdateClientDetails)
+    .put('/update/:id', ClientController.UpdateClientDetails)
     .get('/:id', ClientController.FindOneClientList)
     .get('/:key', ClientController.SearchClient)
     .delete('/:id', ClientController.RemoveClient)
