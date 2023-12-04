@@ -6,8 +6,10 @@ import CreateClient from "./components/CreateClient";
 import ClientList from "./components/ClientList";
 import ClientUpdate from './components/ClientUpdate';
 import { Signin } from './components/Signin';
+// import SendSms from './components/SendSms';
 import Signup from './components/Signup';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 
 
 export default function App() {
@@ -22,6 +24,7 @@ export default function App() {
         {/* Use "element" prop for rendering components */}
         <Route path="/" element={<Home />} />
         <Route path="/update/:id" element={<ClientUpdate/>} />
+
         <Route path="/create" element={<CreateClient />} />
         <Route path="/list" element={<ClientList />} />
 

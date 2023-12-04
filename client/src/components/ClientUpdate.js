@@ -40,7 +40,13 @@ const ClientUpdate = () => {
   }
 
 
-
+  const sendMessage = async () => {
+    let result = await fetch(BASEURL+`Clients/sendEmails`);
+    result.json()
+window.alert("message Send Successsfully")
+   
+  }
+  
   
 
 
@@ -281,7 +287,12 @@ const ClientUpdate = () => {
           </div>
           <div className="form-row">
             <button onClick={update}>Update</button>
+
+              <button onClick={sendMessage}>send</button>
           </div>
+          
+          
+          
         </div>
       </div>
     </div>

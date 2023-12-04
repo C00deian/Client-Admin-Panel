@@ -8,7 +8,7 @@ const MyNavbar = () => {
 
 
   return (
-
+  
     
     <Navbar bg="light" expand="lg">
       <Navbar.Brand className='navbar-brand'>
@@ -19,6 +19,8 @@ const MyNavbar = () => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto navbarr">
+    
+
           <Nav.Link as={Link} to="/">
             <FontAwesomeIcon icon={faHome} /> Home
           </Nav.Link>
@@ -28,6 +30,7 @@ const MyNavbar = () => {
           <Nav.Link as={Link} to="/create">
             <FontAwesomeIcon icon={faPlus} /> Create
           </Nav.Link>
+        
           <Nav.Link as={Link} to="/signup">
             <FontAwesomeIcon icon={faUser} />Registration
           </Nav.Link>
