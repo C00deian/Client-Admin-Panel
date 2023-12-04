@@ -41,7 +41,7 @@ const ClientUpdate = () => {
 
 
   const sendMessage = async () => {
-    let result = await fetch(BASEURL+`Clients/sendEmails`);
+    let result = await fetch(BASEURL+'Clients/sendEmails');
     result.json()
 window.alert("message Send Successsfully")
    
