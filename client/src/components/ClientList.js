@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // import { Table } from 'react-bootstrap';
 import { Table, Form } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faShare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { BASEURL } from './constent';
 import NavBarManu from './NavBarManu';
@@ -42,7 +42,23 @@ function ClientList() {
 
 
     }
+//Send message
+ const sendMessage = async (id) => {
+  try {
+    let result = await fetch(BASEURL + `Clients/sendEmails/${id}`);
 
+    if (result.ok) {
+      const data = await result.json();
+      console.log('Response from server:', data);
+      window.alert('Message sent successfully');
+    } else {
+      throw new Error(`Failed to send message. Status: ${result.status}`);
+    }
+  } catch (error) {
+    console.error('Error sending message:', error);
+    window.alert('Error sending message');
+  }
+};
 
 
 
@@ -86,7 +102,9 @@ function ClientList() {
                                 <th>Mobile No.</th>
                                 <th>Expiary-date</th>
                                 <th>Message</th>
+                        
                                 <th>Operation</th>
+                                <th>Send SMS</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -110,6 +128,15 @@ function ClientList() {
                                             <Link onClick={() => deleteItem(item._id)}>
                                                 <FontAwesomeIcon icon={faTrash} color="red" cursor="pointer" /> Delete
                                             </Link>
+                                            
+                                          
+
+                                        </td>
+                                        <td>
+                                        
+                                        
+                                            <button onClick={()=>sendMessage(item._id)} >Send Now</button>
+                                        
                                         </td>
                                     </tr>
                                 ))

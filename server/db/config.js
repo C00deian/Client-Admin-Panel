@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 mongoose.set('strictQuery', true);
 
 //Development Url at local host
-// mongoose.connect(process.env.MONGO_URL).then(() => {
-//   console.log(`Welcome! MongoDb connected Successfully `);
-// });
+mongoose.connect(process.env.MONGO_URL).then(() => {
+  console.log(`Welcome! MongoDb connected Successfully `);
+});
 
 
 //Live Url at remote server

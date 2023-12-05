@@ -2,7 +2,6 @@ const userSchema = require("../Model/employee");
 const Admin = require('../Admin/Admin')
 const bcrypt = require("bcrypt");
 const axios = require('axios')
-// const cron = require('node-cron');
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 
@@ -17,80 +16,59 @@ const CreateClient = async (req, res) => {
 
 //SEND SMS TO THE CLIENT
 
-const SendSms = async (req, res) => {
+
+
+// Import your userSchema and any other necessary modules
+
+const SendSms =async ( req, res) =>{
+
   try {
-    const results = await userSchema.find({
-      $and: [
-        { email: { $ne: null } },    // Filter out users with empty email
-        { message: { $ne: null } },  // Filter out users with empty message
-        { mobileNo: { $ne: null } }  // Filter out users with empty mobileNo
-      ]
-    }).exec();
 
-    const emailData = results.map((user) => ({
-      email: user.email,
-      message: user.message,
-      mobileNo: user.mobileNo
-    }));
+    const id = req.params.id
 
-    console.log('All documents:', results);
+    // Retrieve user information based on the userId
+    const user = await userSchema.findById({_id: id });
 
-    if (results.length > 0) {
-      const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: 'ritikkumarkashyap9@gmail.com',
-          pass: 'mojv gzjs ajbz riex', // Replace with your App Password
-        },
-      });
-
-      for (const data of emailData) {
-        const mailOptions = {
-          from: 'ritikkumarkashyap9@gmail.com',
-          to: data.email,
-          subject: 'Payment Reminder',
-          text: data.message,
-        };
-
-//Whats App API key  Provided by kk
- async function sendMessage (message, mobilenumber) {
-
-     const WapiKey = process.env.WhatsAppApiKey
-
-
-    const whatsappApiUrl = `https://api.bulkcampaigns.com/api/wapi/?json=true&apikey=${WapiKey}&mobile=${mobilenumber}&msg=${message}`;
-
-//     // Make the GET request
-    axios.get(whatsappApiUrl).then((response) => {
-
-//         // Handle the API response here
-       console.log('Message Sent Successfully:', response.data);
-   })
-      .catch((error) => {
-//          // Handle any errors that occur during the request
-          console.error('Error:', error);
-      });
-
-
-
- }
-
-        // Call the function to Trigger message and email to the Expire Client
-        sendMessage(data.message, data.mobileNo);
-
-        const info = await transporter.sendMail(mailOptions);
-        console.log('Email sent successfully:', info.response);
-      }
-    } else {
-      console.log("No Data Found in the Database");
+    if (!user || !user.email || !user.message || !user.mobileNo) {
+      return res.status(404).json({ error: 'User not found or missing required data' });
     }
 
-    res.status(200).json({ message: 'Emails sent successfully!' });
+    // Send email
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'ritikkumarkashyap9@gmail.com',
+        pass: 'mojv gzjs ajbz riex', // Replace with your App Password
+      },
+    });
+
+    const mailOptions = {
+      from: 'ritikkumarkashyap9@gmail.com',
+      to: user.email,
+      subject: 'Payment Reminder',
+      text: user.message,
+    };
+
+    const emailInfo = await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully:', emailInfo.response);
+
+    // Send WhatsApp SMS
+    const WapiKey = process.env.WhatsAppApiKey;
+    const whatsappApiUrl = `https://api.bulkcampaigns.com/api/wapi/?json=true&apikey=${WapiKey}&mobile=${user.mobileNo}&msg=${user.message}`;
+
+    await axios.get(whatsappApiUrl);
+    console.log('WhatsApp SMS sent successfully');
+
+    res.status(200).json({ message: 'Email and WhatsApp SMS sent successfully!' });
   } catch (error) {
-    console.error('Error querying MongoDB or sending emails:', error);
+    console.error('Error sending messages:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-};
+
+}
+
+
+
 
 //FETCH ALL YOUR DATA
 const GetAllClientList = async (req, res) => {
