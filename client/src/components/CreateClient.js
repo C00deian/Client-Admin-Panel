@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import NavBarManu from './NavBarManu';
 import { BASEURL } from './constent';
 
+import { validateEmail, validateMobileNumber, validateName,  validateDate } from '../components/Form_Validator';
 
 const CreateClient = () => {
   const [formData, setFormData] = useState({
@@ -17,6 +18,39 @@ const CreateClient = () => {
     message: '',
   });
 
+
+//FORM VALIDATOR
+  const validateForm = () => {
+    const isEmailValid = validateEmail(formData.email);
+    const isMobileValid = validateMobileNumber(formData.mobileNo);
+    const isNameValid = validateName(formData.name);
+    const isDateValid = validateDate(formData.expiary);
+
+    if (!isEmailValid) {
+      alert('Invalid email address');
+      return false;
+    }
+
+    if (!isMobileValid) {
+      alert('Invalid mobile number');
+      return false;
+    }
+
+    if (!isNameValid) {
+      alert('Invalid name');
+      return false;
+    }
+
+    if (!isDateValid) {
+      alert('Invalid date formate');
+      return false;
+    }
+
+    return true;
+  };
+
+
+
     // Function to format the "yyyymmdd" date to "MM-DD-YYYY"
    
 
@@ -29,6 +63,12 @@ const CreateClient = () => {
   };
 
   const create = () => {
+
+    if (!validateForm()) {
+      return;
+
+    }
+    
     fetch(BASEURL +'Clients', {
       method: 'POST',
       headers: {
@@ -67,6 +107,7 @@ const CreateClient = () => {
         alert('Error occurred while adding restaurant: ' + error.message);
       });
   };
+  
 
   return (
     <div>
@@ -112,6 +153,7 @@ const CreateClient = () => {
           </div>
           <div className="form-row">
             <textarea
+            
               name="message"
               onChange={handleChange}
               value={formData.message}
