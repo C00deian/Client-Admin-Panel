@@ -37,13 +37,13 @@ const SendSms =async ( req, res) =>{
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'ritikkumarkashyap9@gmail.com',
-        pass: 'mojv gzjs ajbz riex', // Replace with your App Password
+        user: 'legalpartners2023@gmail.com',
+        pass: 'nmgw melh lusi lmpt', // Replace with your App Password
       },
     });
 
     const mailOptions = {
-      from: 'ritikkumarkashyap9@gmail.com',
+      from: 'legalpartners2023@gmail.com',
       to: user.email,
       subject: 'Payment Reminder',
       text: user.message,
