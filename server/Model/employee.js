@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema({
   selectedOption3: String,
   selectedOption4: String,
   selectedOption5: String,
+  Number : String,
   is_Payment: { type: Boolean, default: false }
 });
 
