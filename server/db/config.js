@@ -8,14 +8,14 @@ mongoose.connect(process.env.MONGO_URL).then(() => {
 
 
 //Live Url at remote server
- try {
-  mongoose.connect(process.env.BASE_URL).then(() => {
+//  try {
+//   mongoose.connect(process.env.BASE_URL).then(() => {
 
-  console.log(`SHASHI'S SERVER Connected Successfully`);
-});
+//   console.log(`SHASHI'S SERVER Connected Successfully`);
+// });
 
-}catch(error){
+// }catch(error){
 
 
-console.log(error, "SERVER not Connected Yet")
-}
+// console.log(error, "SERVER not Connected Yet")
+// }
