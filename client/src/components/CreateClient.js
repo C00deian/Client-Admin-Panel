@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import NavBarManu from './NavBarManu';
 import { BASEURL } from './constent';
 
-import { validateEmail, validateMobileNumber, validateName, validateDate } from '../components/Form_Validator';
+import { validateEmail, validateMobileNumber, validateName, validateDate  ,validateMessage} from '../components/Form_Validator';
 
 const CreateClient = () => {
   const [formData, setFormData] = useState({
@@ -22,28 +22,36 @@ const CreateClient = () => {
 
   //FORM VALIDATOR
   const validateForm = () => {
+    const isNameValid = validateName(formData.name);
     const isEmailValid = validateEmail(formData.email);
     const isMobileValid = validateMobileNumber(formData.mobileNo);
-    const isNameValid = validateName(formData.name);
     const isDateValid = validateDate(formData.expiary);
+    const isMessage = validateMessage(formData.message);
+
+    if (!isNameValid) {
+      alert('Please fill the Name First!');
+      return false;
+    }
 
     if (!isEmailValid) {
-      alert('Invalid email address');
+      alert('E-mail should not be Blank!');
       return false;
     }
 
     if (!isMobileValid) {
-      alert('Invalid mobile number');
+      alert('Mobile No. should not be Blank!');
       return false;
     }
 
-    if (!isNameValid) {
-      alert('Invalid name');
-      return false;
-    }
+   
 
     if (!isDateValid) {
-      alert('Invalid date formate');
+      alert('Date should Not be Blank!');
+      return false;
+    }
+
+    if (!isMessage) {
+      alert('Message Field should Not be Blank!');
       return false;
     }
 
@@ -159,7 +167,6 @@ const CreateClient = () => {
           </div>
           <div className="form-row">
             <textarea
-
               name="message"
               onChange={handleChange}
               value={formData.message}

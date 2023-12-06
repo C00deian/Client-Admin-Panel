@@ -24,5 +24,8 @@ export const validateDate = (expiary) => {
     return dateRegex.test(expiary);
   };
   
- 
+  export const validateMessage = (message) => {
+    const nameRegex = /^[a-zA-Z0-9\s]+$/;
+    return nameRegex.test(message);
+  };
   
