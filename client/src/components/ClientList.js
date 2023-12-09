@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // import { Table } from 'react-bootstrap';
 import { Table, Form } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faShare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit,  faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { BASEURL } from './constent';
 import NavBarManu from './NavBarManu';
@@ -102,7 +102,7 @@ function ClientList() {
                                 <th>Mobile No.</th>
                                 <th>Expiary-date</th>
                                 <th>Message</th>
-                        
+                                <th>Case No.</th>
                                 <th>Operation</th>
                                 <th>Send SMS</th>
                             </tr>
@@ -120,6 +120,7 @@ function ClientList() {
                                         <td>{item.mobileNo}</td>
                                         <td>{item.expiary}</td>
                                         <td>{item.message}</td>
+                                        <td>{item.Number}</td>
                                         <td>
                                             <Link to={`/update/${item._id}`}>
                                                 <FontAwesomeIcon icon={faEdit} color="orange" /> Update

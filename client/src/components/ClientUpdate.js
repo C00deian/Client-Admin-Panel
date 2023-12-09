@@ -19,7 +19,7 @@ const ClientUpdate = () => {
     selectedOption4: '',
     selectedOption5: '',
     message: '',
-
+Number : ""
 
   });
 
@@ -183,8 +183,24 @@ const ClientUpdate = () => {
 
                   </select>
                 </div>
+             
               </div>
               <div className="box2">
+              <div className="register">
+                  <label className='NO' > Case No :</label>
+
+                  <div className='NUMBER'>
+                  <input
+              
+                    type="text"
+                    name="Number"
+                    onChange={handleChange}
+                    value={formData.Number}
+                    placeholder="NO."
+                
+                  />
+                  </div>
+                </div>
                 <div className="type">
                   <label >Type :</label>
                   <select
