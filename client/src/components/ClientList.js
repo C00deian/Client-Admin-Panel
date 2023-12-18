@@ -10,7 +10,7 @@ import NavBarManu from './NavBarManu';
 function ClientList() {
 
 
-    const [formData, setFormData] = useState(null);
+    const [formData, setFormData] = useState([]);
 
     // Get All  Client Detail List and Apply  Operations Like Delete And Update. 
     const getAllClientData = () => {
@@ -25,23 +25,26 @@ function ClientList() {
 
     //Search CLient Data
     const HandleSearch = async (event) => {
-
-        let key = event.target.value
+        let key = event.target.value;
+    
         if (key) {
-            let result = await fetch(BASEURL + `Clients/${key}`)
-            result = await result.json()
-            if (result) {
-
-                setFormData(result)
-
+          try {
+            const result = await fetch(BASEURL + `Clients/${key}`);
+            const data = await result.json();
+    
+            if (data) {
+              setFormData([data]); // Wrap the single result in an array
             }
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          }
         } else {
-
-            getAllClientData();
+          getAllClientData();
         }
+      };
 
 
-    }
+    
 //Send message
  const sendMessage = async (id) => {
   try {
@@ -112,7 +115,7 @@ function ClientList() {
 
                             {
 
-                                formData.map((item, index) => (
+                                formData.map((item, index) => 
                                     <tr key={item._id}>
                                         <td>{index + 1}</td>
                                         <td>{item.name}</td>
@@ -140,7 +143,7 @@ function ClientList() {
                                         
                                         </td>
                                     </tr>
-                                ))
+                                )
 
                             }
                         </tbody>

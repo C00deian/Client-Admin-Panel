@@ -14,34 +14,35 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
 export default function App() {
+  
 
   return (
 
     <div className="App">
-  
-    <Router>
-      <Routes>
-      
-        {/* Use "element" prop for rendering components */}
-        <Route path="/" element={<Home />} />
-        <Route path="/update/:id" element={<ClientUpdate/>} />
-        <Route path="/BSB" element={<BSB/>} />
-        <Route path="/create" element={<CreateClient />} />
-        <Route path="/list" element={<ClientList />} />
 
-        {/* Use "element" prop for rendering components */}
-        {/* <Route path="/" element={<Home />} /> */}
-        <Route path="/login" element={<Signin />} />
-          <Route path="/signup" element={<Signup  />} />
-        
+      <Router>
+        <Routes>
 
-         {/* Other routes */}
+          {/* Use "element" prop for rendering components */}
+          <Route path="/" element={<Home />} />
+          <Route path="/update/:id" element={<ClientUpdate />} />
+          <Route path="/BSB" element={<BSB />} />
+          <Route path="/create" element={<CreateClient />} />
+          <Route path="/list" element={<ClientList />} />
 
-                {/* Define other routes here */}
-            
-      </Routes>
-          
-    </Router>
-  </div>
+          {/* Use "element" prop for rendering components */}
+          {/* <Route path="/" element={<Home />} /> */}
+          <Route path="/login" element={<Signin />} />
+          <Route path="/signup" element={<Signup />} />
+
+
+          {/* Other routes */}
+
+          {/* Define other routes here */}
+
+        </Routes>
+
+      </Router>
+    </div>
   )
 }
