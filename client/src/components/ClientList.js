@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // import { Table } from 'react-bootstrap';
 import { Table, Form } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit,  faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { BASEURL } from './constent';
 import NavBarManu from './NavBarManu';
@@ -10,7 +10,7 @@ import NavBarManu from './NavBarManu';
 function ClientList() {
 
 
-    const [formData, setFormData] = useState([]);
+    const [formData, setFormData] = useState();
 
     // Get All  Client Detail List and Apply  Operations Like Delete And Update. 
     const getAllClientData = () => {
@@ -26,49 +26,51 @@ function ClientList() {
     //Search CLient Data
     const HandleSearch = async (event) => {
         let key = event.target.value;
-    
+
         if (key) {
-          try {
-            const result = await fetch(BASEURL + `Clients/${key}`);
-            const data = await result.json();
-    
-            if (data) {
-              setFormData([data]); // Wrap the single result in an array
+            try {
+                const result = await fetch(BASEURL + `Clients/search/${key}`);
+                const data = await result.json();
+
+                if (data) {
+                    setFormData(data); // Wrap the single result in an array
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
             }
-          } catch (error) {
-            console.error('Error fetching data:', error);
-          }
+
+
+            //again render all the Document  if there is know value in  that keyword
         } else {
-          getAllClientData();
+            getAllClientData();
         }
-      };
+    };
 
 
-    
-//Send message
- const sendMessage = async (id) => {
-  try {
-    let result = await fetch(BASEURL + `Clients/sendEmails/${id}`);
 
-    if (result.ok) {
-      const data = await result.json();
-      console.log('Response from server:', data);
-      window.alert('Message sent successfully');
-    } else {
-      throw new Error(`Failed to send message. Status: ${result.status}`);
-    }
-  } catch (error) {
-    console.error('Error sending message:', error);
-    window.alert('Error sending message');
-  }
-};
+    //Send message
+    const sendMessage = async (id) => {
+        try {
+            let result = await fetch(BASEURL + `Clients/sendEmails/${id}`);
 
-
+            if (result.ok) {
+                const data = await result.json();
+                console.log('Response from server:', data);
+                window.alert('Message sent successfully');
+            } else {
+                throw new Error(`Failed to send message. Status: ${result.status}`);
+            }
+        } catch (error) {
+            console.error('Error sending message:', error);
+            window.alert('Error sending message');
+        }
+    };
 
 
 
 
 
+    //Delete Client Data 
     const deleteItem = (id) => {
         fetch(BASEURL + `Clients/${id}`, {
             method: "DELETE",
@@ -99,7 +101,7 @@ function ClientList() {
                     <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th>S. N.</th>
+                                <th>S.N.</th>
                                 <th>Name</th>
                                 <th>E-mail</th>
                                 <th>Mobile No.</th>
@@ -110,12 +112,14 @@ function ClientList() {
                                 <th>Send SMS</th>
                             </tr>
                         </thead>
+
                         <tbody>
 
 
                             {
 
-                                formData.map((item, index) => 
+
+                                formData.length > 0 ? formData.map((item, index) =>
                                     <tr key={item._id}>
                                         <td>{index + 1}</td>
                                         <td>{item.name}</td>
@@ -126,31 +130,32 @@ function ClientList() {
                                         <td>{item.Number}</td>
                                         <td>
                                             <Link to={`/update/${item._id}`}>
-                                                <FontAwesomeIcon icon={faEdit} color="orange" /> Update
+                                                <FontAwesomeIcon icon={faEdit} color="orange" /> Edit
                                             </Link>
                                             <div></div>
                                             <Link onClick={() => deleteItem(item._id)}>
                                                 <FontAwesomeIcon icon={faTrash} color="red" cursor="pointer" /> Delete
                                             </Link>
-                                            
-                                          
 
                                         </td>
                                         <td>
-                                        
-                                        
-                                            <button onClick={()=>sendMessage(item._id)} >Send Now</button>
-                                        
+
+                                            <button onClick={() => sendMessage(item._id)} > Send  </button>
+
                                         </td>
                                     </tr>
                                 )
 
+
+                                    : <h1 className='list-record'> Record Not Found😞</h1>
                             }
+
                         </tbody>
+
                     </Table>
                 </div>
             ) : (
-                <p>Please Wait....</p>
+                <p>Please Wait...</p>
             )}
         </div>
     );
