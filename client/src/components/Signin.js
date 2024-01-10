@@ -93,12 +93,12 @@ export const Signin = () => {
               </div>
         
     
-              <div className="form-row">
-                <button onClick={SigninAdmin}>Sign in</button>
+           
+                <button onClick={SigninAdmin} className='signup-btn'>Sign in</button>
                 <br></br>
                                                           <br></br>
-           <Link to={'/signup'}> Create an Account</Link>
-              </div>
+           <Link to={'/signup'} > Create an Account</Link>
+            
             </div>
           </div>
         </div>

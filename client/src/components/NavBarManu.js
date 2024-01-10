@@ -20,7 +20,7 @@ const MyNavbar = () => {
 
   const Logout = () => {
     localStorage.clear();
-    navigate('/signup');
+    navigate('/login');
   };
 
   return (
@@ -54,7 +54,7 @@ const MyNavbar = () => {
               </Link>
             </li>
             <li>
-              <Link to="/signin" onClick={Logout}>
+              <Link to="/login" onClick={Logout}>
                 <FontAwesomeIcon icon={faSignOutAlt} />
                 Logout
               </Link>

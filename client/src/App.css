@@ -16,13 +16,8 @@ h2 {
  
 }
 
-.nav-link{
 
-  margin-top: -25px  !important;
-}
-.navbar{
-  height: 55px !important;
-}
+
 
 span{
   display: inline-block;
@@ -40,28 +35,11 @@ span{
 }
 
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
 
 
 
-.navbarr{
-  margin-top: 25px !important;
 
-  
-}
+/* list user */
 
 a {
  
@@ -195,7 +173,7 @@ button{
   margin-top: -20px !important;
   width: 100px;
   font-weight: 700 !important;
-border-radius: 5px;
+border-radius: 5px !important;
 cursor: pointer;
 border: none;
 box-shadow: 1px 2px 5px rgba(70, 69, 69, 0.89);
@@ -246,3 +224,14 @@ position: absolute;
 
 }
 
+
+
+.signup-btn{
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px !important;
+  width: 30rem;
+}
+.send-btn{
+  margin-top: 4px !important;
+}

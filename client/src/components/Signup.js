@@ -27,7 +27,7 @@ function Signup() {
   useEffect(()=>{
 const auth = localStorage.getItem('admin');
 if(auth){
-  navigate('/login');
+  navigate('/');
 }
   } ,[]) 
 
@@ -78,7 +78,9 @@ if(auth){
   return (
     <div>
       <NavBarManu />
+   
       <div className='Main-Section'>
+
         <h2>Sign up</h2>
         <div className="form-container">
           <div className="form-row">
@@ -114,15 +116,16 @@ if(auth){
             />
           </div>
 
-
-          <div className="form-row ">
-            <button onClick={SignupAdmin}>Signup</button> <br></br>
+    
+          </div>
+          
+            <button onClick={SignupAdmin} className='signup-btn'>Signup</button> <br></br>
             <br></br>
             <Link to={'/login'}>Already have an Account</Link>
-          </div>
-        </div>
+      
       </div>
     </div>
+    
   )
 }
 

@@ -140,7 +140,7 @@ function ClientList() {
                                         </td>
                                         <td>
 
-                                            <button onClick={() => sendMessage(item._id)} > Send  </button>
+                                            <button className='send-btn' onClick={() => sendMessage(item._id)} > Send  </button>
 
                                         </td>
                                     </tr>
