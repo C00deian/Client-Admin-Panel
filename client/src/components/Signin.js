@@ -29,7 +29,7 @@ export const Signin = () => {
 
         e.preventDefault();
 
-  const res =  await  fetch('/admin-login', {
+  const res =  await  fetch(BASEURL+'Clients/admin-login', {
           method: 'POST',
           headers: {
     
@@ -48,9 +48,10 @@ export const Signin = () => {
           else if (res.status === 404) {
             window.alert(data.error || 'Admin Not Found');
 
-          }  else if (res.status === 201) {
-            // Successful login
-            // dispatch({ type: 'USER', payload: true });
+          }  else if (res.status === 200) {
+           
+           
+            localStorage.setItem('admin', JSON.stringify(data))
             window.alert(data.message || 'Login Successful');
             navigate('/');
           } 
@@ -96,7 +97,7 @@ export const Signin = () => {
                 <button onClick={SigninAdmin}>Sign in</button>
                 <br></br>
                                                           <br></br>
-           <Link to={'/signup'}> <a>Create an Account</a></Link>
+           <Link to={'/signup'}> Create an Account</Link>
               </div>
             </div>
           </div>

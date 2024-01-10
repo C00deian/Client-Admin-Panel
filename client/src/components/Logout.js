@@ -3,8 +3,11 @@ import {
    Navigate
 } from 'react-router-dom'
 const Logout = () => {
-    localStorage.clear();
-    return <Navigate to="/login" />
+    const auth = localStorage.clear('admin');
+    if(auth){
+        return <Navigate to="signup" />
+    }
+
 };
 
 export default Logout;

@@ -12,7 +12,10 @@ router
     .get('/search/:key', ClientController.SearchClient)
     .delete('/:id', ClientController.RemoveClient)
 
+//admin-register
 
+.post('/admin-register', ClientController.AdminRegister)
+.post('/admin-login', ClientController.AdminLogin)
 
 
 exports.router = router;

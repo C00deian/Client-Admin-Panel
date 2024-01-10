@@ -1,8 +1,8 @@
 const userSchema = require('../Model/employee');
 const axios = require('axios')
 const nodemailer = require('nodemailer');
-
-
+const Admin = require('../Admin/Admin')
+const bcrypt = require('bcrypt');
 
 
 //POST YOUR DATA INTO DB
@@ -148,6 +148,97 @@ const SearchClient = async (req, res) => {
 
 }
 
+//ADMIN REGISTRATION
+const AdminRegister = async (req, res) => {
+
+  const { username, Email, password, cpassword } = req.body;
+
+  if (!username || !Email ||  !password || !cpassword)
+
+    return res.status(400).json({ error: "Please! fill the blank field" })
+
+
+  try {
+
+
+
+    const UserExists = await Admin.findOne({ Email: Email })
+
+
+
+    if (UserExists) {
+
+      return res.status(401).json({ error: "E-mail already Exists" });
+    }
+
+
+    else if (password != cpassword) {
+
+      return res.status(422).json({ error: " Password not matched" });
+
+    }
+
+    else {
+
+      const user = new Admin({ username, Email,  password, cpassword });
+
+      await user.save();
+// console.log(user)
+
+      // res.status(200).json({ message: "user Registered Successfully" });
+      res.status(200).json(user);
+    }
+
+    // secure password before save it into the DB.
+
+
+  } catch (err) {
+    res.status(500).json({ err: "Somthing went Wrong from server!" })
+  }
+
+
+}
+
+
+//ADMIN LOGIN
+
+const AdminLogin = async (req, res) => {
+    try {
+      const { Email, password } = req.body;
+
+      if (!Email || !password) {
+
+        return res.status(400).json({ error: "Please fill the Data Properly" });
+      }
+
+
+      const user = await Admin.findOne({ Email: Email , password:password });
+
+      if (!user) {
+
+   return res.status(401).json({ message: " Invalid Login  detail" })
+
+
+        }
+        else {
+          // res.status(200).json({ message: "User Signin Succesfully" });
+          await user.save();
+          res.status(200).json(user);
+        }
+
+
+
+
+    } catch (err) {
+
+      console.error(err);
+      res.status(500).json({ error: 'An error occurred during Login. Please try again later.' });
+    }
+  }
+
+
+
+
 
 module.exports = {
 
@@ -157,5 +248,8 @@ module.exports = {
   RemoveClient,
   FindOneClientList,
   SearchClient,
-  SendSms
+  SendSms,
+  AdminRegister,
+AdminLogin,
+
 }

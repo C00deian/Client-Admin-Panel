@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import NavBarManu from './NavBarManu';
-// import { BASEURL } from './constent';
+import { BASEURL } from './constent';
 function Signup() {
 
   const navigate = useNavigate();
@@ -24,22 +24,30 @@ function Signup() {
     });
   };
 
+  useEffect(()=>{
+const auth = localStorage.getItem('admin');
+if(auth){
+  navigate('/login');
+}
+  } ,[]) 
 
-  const SignupAdmin =  async (e) => {
-const {username,Email,password,cpassword } = AdminData
- e.preventDefault();
-  const res = await  fetch('/admin-register', {
+
+  const SignupAdmin = async (e) => {
+    const { username, Email, password, cpassword } = AdminData
+    e.preventDefault();
+    const res = await fetch(BASEURL + 'Clients/admin-register', {
       method: 'POST',
       headers: {
 
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({username,Email,password,cpassword}),
+      body: JSON.stringify({ username, Email, password, cpassword }),
     })
     try {
       const data = await res.json()
+      console.warn(data)
       if (res.status === 400) {
-        window.alert(data.error || ' Please fill the form properly.');
+        window.alert(data.error || 'Please fill the form properly.');
       } else if (res.status === 401) {
         window.alert(data.error || 'Email Already Exists');
 
@@ -48,10 +56,12 @@ const {username,Email,password,cpassword } = AdminData
         window.alert(data.error || 'Password not matched');
 
       }
-      else if (res.status === 201) {
-        // Successful login
-        // dispatch({ type: 'USER', payload: true });
+      else if (res.status === 200) {
+     
         window.alert(data.message || " Registered Successfully");
+
+        //Store Data In A lcal Storage 
+        localStorage.setItem('admin', JSON.stringify(data))
         navigate('/login');
       } else {
         console.error('An error occurred during Registration:', data);
@@ -76,7 +86,7 @@ const {username,Email,password,cpassword } = AdminData
               type="text"
               name="username"
               onChange={handleChange}
-         value={AdminData.username}
+              value={AdminData.username}
               placeholder="Username"
             />
             <input
@@ -103,12 +113,12 @@ const {username,Email,password,cpassword } = AdminData
               placeholder="Confirm Password"
             />
           </div>
-    
+
 
           <div className="form-row ">
             <button onClick={SignupAdmin}>Signup</button> <br></br>
-                                                          <br></br>
-           <Link to={'/login'}> <a>Already have an Account</a></Link>
+            <br></br>
+            <Link to={'/login'}>Already have an Account</Link>
           </div>
         </div>
       </div>
