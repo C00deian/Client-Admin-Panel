@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.61b9cb43.css",
+    "main.js": "/static/js/main.d33a6194.js",
+    "index.html": "/index.html",
+    "static/media/hamburger.svg": "/static/media/hamburger.953e16a69081114a1fca4a33df87827e.svg",
+    "static/media/close-icon.svg": "/static/media/close-icon.fe36843b7be26e31752c8a75066a6c78.svg",
+    "main.61b9cb43.css.map": "/static/css/main.61b9cb43.css.map",
+    "main.d33a6194.js.map": "/static/js/main.d33a6194.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.61b9cb43.css",
+    "static/js/main.d33a6194.js"
+  ]
+}
