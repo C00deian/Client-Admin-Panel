@@ -62,7 +62,7 @@ if(auth){
 
         //Store Data In A lcal Storage 
         localStorage.setItem('admin', JSON.stringify(data))
-        navigate('/login');
+        navigate('/');
       } else {
         console.error('An error occurred during Registration:', data);
         window.alert(data.error || 'An error occurred during Login. Please try again later.');

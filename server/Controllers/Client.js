@@ -189,7 +189,6 @@ const AdminRegister = async (req, res) => {
       res.status(200).json(user);
     }
 
-    // secure password before save it into the DB.
 
 
   } catch (err) {

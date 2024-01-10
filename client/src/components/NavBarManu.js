@@ -1,14 +1,22 @@
-// ... (import statements remain the same)
-import React from 'react';
-import { Navbar, Nav } from 'react-bootstrap';
+import React,{useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle, faHome, faList, faPlus, faUser, faLock, faHammer,  faSignOut, } from '@fortawesome/free-solid-svg-icons';
-
+import {
+  faHome,
+  faSignInAlt,
+  faUserPlus,
+  faSignOutAlt,
+  faUsers,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons';
+import { ReactComponent as HamburgerIcon } from '../components/assets/icons/hamburger.svg';
+import { ReactComponent as CrossIcon } from '../components/assets/icons/close-icon.svg';
+import './navbar.css';
 
 const MyNavbar = () => {
   const auth = localStorage.getItem('admin');
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const Logout = () => {
     localStorage.clear();
@@ -16,55 +24,60 @@ const MyNavbar = () => {
   };
 
   return (
-    <div>
-      <Navbar bg="light" expand="lg">
-        <Navbar.Brand className='navbar-brand'>
-          <Link to="/">
-            <FontAwesomeIcon icon={faUserCircle} /> Admin Panel
-          </Link>
-        </Navbar.Brand>
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto navbarr">
-
-            {auth ? (
-              <>
-                <Nav.Link as={Link} to="/">
-                  <FontAwesomeIcon icon={faHome} /> Home
-                </Nav.Link>
-
-                <Nav.Link as={Link} to="/create">
-                  <FontAwesomeIcon icon={faPlus} /> Create
-                </Nav.Link>
-
-
-                <Nav.Link as={Link} to="/list">
-                  <FontAwesomeIcon icon={faList} /> List
-                </Nav.Link>
-
-
-                <Nav.Link as={Link} to="https://www.bombayhighcourt.nic.in/index.php#">
-                  <FontAwesomeIcon icon={faHammer} /> BHC
-                </Nav.Link>
-
+    <nav>
+      <Link to="/" className="title">
+        NAVBAR
+      </Link>
+      <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
+        {menuOpen ? <CrossIcon style={{ fill: "white" }} /> : <HamburgerIcon style={{ fill: "white" }} />}
+      </div>
+      <ul className={menuOpen ? "open" : ""}>
+        {auth ? (
+          <>
+            <li>
+              <Link to="/">
+                <FontAwesomeIcon icon={faHome} /> 
                 
-                <Nav.Link onClick={Logout} as={Link} to="/signup">
-                  <FontAwesomeIcon icon={faSignOut}  /> Logout  ({JSON.parse(auth).username})
-                </Nav.Link>
-              </>
-            ) : (
-              <Nav >
-                <Nav.Link as={Link} to="/signup">
-                  <FontAwesomeIcon icon={faUser} /> Registration
-                </Nav.Link>
-                <Nav.Link as={Link} to="/login">
-                  <FontAwesomeIcon icon={faLock} /> Sign In
-                </Nav.Link>
-              </Nav>
-            )}
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-    </div>
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/create">
+                <FontAwesomeIcon icon={faUserPlus} />
+                Create 
+              </Link>
+            </li>
+            <li>
+              <Link to="/list">
+                <FontAwesomeIcon icon={faUsers} />
+                User 
+              </Link>
+            </li>
+            <li>
+              <Link to="/signin" onClick={Logout}>
+                <FontAwesomeIcon icon={faSignOutAlt} />
+                Logout
+              </Link>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <Link to="/signup">
+                <FontAwesomeIcon icon={faUser} />
+                Register
+              </Link>
+            </li>
+            <li>
+              <Link to="/login">
+                <FontAwesomeIcon icon={faSignInAlt} />
+                Signin
+              </Link>
+            </li>
+          </>
+        )}
+      </ul>
+    </nav>
   );
 };
 
