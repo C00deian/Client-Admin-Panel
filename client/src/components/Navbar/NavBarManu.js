@@ -9,8 +9,8 @@ import {
   faUsers,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
-import { ReactComponent as HamburgerIcon } from '../components/assets/icons/hamburger.svg';
-import { ReactComponent as CrossIcon } from '../components/assets/icons/close-icon.svg';
+import { ReactComponent as HamburgerIcon } from '../../components/assets/icons/hamburger.svg';
+import { ReactComponent as CrossIcon } from '../../components/assets/icons/close-icon.svg';
 import './navbar.css';
 
 const MyNavbar = () => {
@@ -53,10 +53,10 @@ const MyNavbar = () => {
                 User 
               </Link>
             </li>
-            <li>
+            <li >
               <Link to="/login" onClick={Logout}>
                 <FontAwesomeIcon icon={faSignOutAlt} />
-                Logout
+                Logout <li className='username'>{JSON.parse(auth).username}</li>
               </Link>
             </li>
           </>

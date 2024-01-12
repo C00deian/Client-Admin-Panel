@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import NavBarManu from './NavBarManu';
+import NavBarManu from './Navbar/NavBarManu';
 import { BASEURL } from './constent';
 
 import { validateEmail, validateMobileNumber, validateName, validateDate  ,validateMessage} from '../components/Form_Validator';

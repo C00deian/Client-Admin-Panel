@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import NavBarManu from './NavBarManu';
+import NavBarManu from './Navbar/NavBarManu';
 import { BASEURL } from './constent';
 import { Link, useNavigate } from 'react-router-dom'
 

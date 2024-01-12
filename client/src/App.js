@@ -35,6 +35,7 @@ export default function App() {
 
 </Route>
           {/* Other routes */}
+          
           <Route path="/login" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
           {/* Define other routes here */}

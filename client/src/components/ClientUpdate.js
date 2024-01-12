@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import NavBarManu from './NavBarManu';
+import NavBarManu from './Navbar/NavBarManu';
 import { BASEURL } from './constent';
 import { useParams } from 'react-router-dom';
 

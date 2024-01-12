@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
-import NavBarManu from './NavBarManu';
+import NavBarManu from './Navbar/NavBarManu';
 import { BASEURL } from './constent';
 function Signup() {
 

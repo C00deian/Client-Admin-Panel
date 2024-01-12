@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { BASEURL } from './constent';
-import NavBarManu from './NavBarManu';
+import NavBarManu from './Navbar/NavBarManu';
 
 function ClientList() {
 
