@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import NavBarManu from './Navbar/NavBarManu';
 import { BASEURL } from './constent';
+import toast, { Toaster } from 'react-hot-toast';
 function Signup() {
 
   const navigate = useNavigate();
@@ -24,12 +25,12 @@ function Signup() {
     });
   };
 
-  useEffect(()=>{
-const auth = localStorage.getItem('admin');
-if(auth){
-  navigate('/');
-}
-  } ,[]) 
+  useEffect(() => {
+    const auth = localStorage.getItem('admin');
+    if (auth) {
+      navigate('/');
+    }
+  }, [])
 
 
   const SignupAdmin = async (e) => {
@@ -47,28 +48,26 @@ if(auth){
       const data = await res.json()
       console.warn(data)
       if (res.status === 400) {
-        window.alert(data.error || 'Please fill the form properly.');
+        toast.error(data.error);
       } else if (res.status === 401) {
-        window.alert(data.error || 'Email Already Exists');
+        toast.error(data.error || 'Email Already Exists');
 
 
       } else if (res.status === 422) {
-        window.alert(data.error || 'Password not matched');
+        toast.error(data.error || 'Password not matched');
 
       }
       else if (res.status === 200) {
-     
-        window.alert(data.message || " Registered Successfully");
+
+        toast.success(data.message || " Registered Successfully");
 
         //Store Data In A lcal Storage 
         localStorage.setItem('admin', JSON.stringify(data))
         navigate('/');
-      } else {
-        console.error('An error occurred during Registration:', data);
-        window.alert(data.error || 'An error occurred during Login. Please try again later.');
       }
     } catch (error) {
-      console.error('Somthing went Wrong from server!:', error);
+
+      toast.error('Somthing went Wrong from server!', error);
       window.alert('Somthing went Wrong from server!');
     }
   };
@@ -78,9 +77,9 @@ if(auth){
   return (
     <div>
       <NavBarManu />
-   
+      <Toaster />
       <div className='Main-Section'>
-
+   
         <h2>Sign up</h2>
         <div className="form-container">
           <div className="form-row">
@@ -116,16 +115,16 @@ if(auth){
             />
           </div>
 
-    
-          </div>
-          
-            <button onClick={SignupAdmin} className='signup-btn'>Signup</button> <br></br>
-            <br></br>
-            <Link to={'/login'}>Already have an Account</Link>
-      
+
+        </div>
+
+        <button onClick={SignupAdmin} className='signup-btn'>Signup</button> <br></br>
+        <br></br>
+        <Link to={'/login'}>Already have an Account</Link>
+
       </div>
     </div>
-    
+
   )
 }
 

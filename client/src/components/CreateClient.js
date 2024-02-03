@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import NavBarManu from './Navbar/NavBarManu';
 import { BASEURL } from './constent';
-
+import toast, { Toaster } from 'react-hot-toast';
 import { validateEmail, validateMobileNumber, validateName, validateDate  ,validateMessage} from '../components/Form_Validator';
 
 const CreateClient = () => {
@@ -29,29 +29,29 @@ const CreateClient = () => {
     const isMessage = validateMessage(formData.message);
 
     if (!isNameValid) {
-      alert('Please fill the Name First!');
+      toast.error('Please fill the Name First!');
       return false;
     }
 
     if (!isEmailValid) {
-      alert('E-mail should not be Blank!');
+      toast.error('E-mail should not be Blank!');
       return false;
     }
 
     if (!isMobileValid) {
-      alert('Mobile No. should not be Blank!');
+      toast.error('Mobile No. should not be Blank!');
       return false;
     }
 
    
 
     if (!isDateValid) {
-      alert('Date should Not be Blank!');
+      toast.error('Date should Not be Blank!');
       return false;
     }
 
     if (!isMessage) {
-      alert('Message Field should Not be Blank!');
+      toast.error('Message Field should Not be Blank!');
       return false;
     }
 
@@ -89,13 +89,13 @@ const CreateClient = () => {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error('Network response was not ok. Status: ' + response.status);
+          throw new Error(`Network response was not ok. Status:  ${response.status}`);
         }
         return response.json();
       })
       .then((data) => {
         console.log(data);
-        alert('Client has been added');
+        toast.success('Client Created Successfully');
 
         //when Data has been Store to DB  The Field of Form  will be blanked automatically.
         setFormData({
@@ -114,7 +114,7 @@ const CreateClient = () => {
       })
       .catch((error) => {
         console.error('Error:', error);
-        alert('Error occurred while adding restaurant: ' + error.message);
+        toast.error(`Server not Responding Your Request!  ${error.message}`);
       });
   };
 
@@ -122,7 +122,9 @@ const CreateClient = () => {
   return (
     <div>
       <NavBarManu />
+<Toaster/>
       <div className='Main-Section'>
+     
         <h2>Create Client</h2>
         <div className="form-container">
           <div className="form-row">

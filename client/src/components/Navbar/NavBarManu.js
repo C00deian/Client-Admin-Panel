@@ -36,26 +36,26 @@ const MyNavbar = () => {
           <>
             <li>
               <Link to="/">
-                <FontAwesomeIcon icon={faHome} /> 
+                <FontAwesomeIcon icon={faHome} className='Icon'/> 
                 
                 Home
               </Link>
             </li>
             <li>
               <Link to="/create">
-                <FontAwesomeIcon icon={faUserPlus} />
+                <FontAwesomeIcon icon={faUserPlus}  className='Icon' />
                 Create 
               </Link>
             </li>
             <li>
               <Link to="/list">
-                <FontAwesomeIcon icon={faUsers} />
+                <FontAwesomeIcon icon={faUsers}  className='Icon'/>
                 User 
               </Link>
             </li>
             <li >
               <Link to="/login" onClick={Logout}>
-                <FontAwesomeIcon icon={faSignOutAlt} />
+                <FontAwesomeIcon icon={faSignOutAlt}  className='Icon'/>
                 Logout <li className='username'>{JSON.parse(auth).username}</li>
               </Link>
             </li>
@@ -64,13 +64,13 @@ const MyNavbar = () => {
           <>
             <li>
               <Link to="/signup">
-                <FontAwesomeIcon icon={faUser} />
+                <FontAwesomeIcon icon={faUser}  className='Icon'/>
                 Register
               </Link>
             </li>
             <li>
               <Link to="/login">
-                <FontAwesomeIcon icon={faSignInAlt} />
+                <FontAwesomeIcon icon={faSignInAlt} className='Icon' />
                 Signin
               </Link>
             </li>

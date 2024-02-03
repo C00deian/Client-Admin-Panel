@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { BASEURL } from './constent';
+import toast, { Toaster } from 'react-hot-toast';
 import NavBarManu from './Navbar/NavBarManu';
 
 function ClientList() {
@@ -69,20 +70,17 @@ function ClientList() {
 
 
 
-
     //Delete Client Data 
     const deleteItem = (id) => {
-        fetch(BASEURL + `Clients/${id}`, {
-            method: "DELETE",
-        }).then((result) => {
-            result.json().then((resp) => {
-                alert("Client has been deleted");
+
+        const userConfirmation = window.confirm('Are you Sure You want to delete.');
+        if (userConfirmation) {
+            confirmDelete(id);
+        } else {
+            window.alert("Delete canceled");
+        }
 
 
-                // When Client Deleted.  ReRender The List To See The Rest Client List.
-                getAllClientData();
-            });
-        });
     };
 
     useEffect(() => {
@@ -90,10 +88,36 @@ function ClientList() {
 
     }, [])
 
+    const confirmDelete = (id) => {
+
+        fetch(BASEURL + `Clients/${id}`, {
+            method: "DELETE",
+        }).then((result) => {
+
+            result.json().then((resp) => {
+
+                toast.success('Client Deleted');
+
+
+                // When Client Deleted.  ReRender The List To See The Rest Client List.
+                getAllClientData();
+            });
+        });
+    }
+
+
+
+
     return (
         <div>
             <NavBarManu />
+           
             <h1>Client List</h1>
+            <Toaster
+                
+                position="top-right"
+                reverseOrder={false}
+            />
             <Form.Control type="text" onChange={HandleSearch} placeholder="Search Client" />
 
             {formData ? (
@@ -133,7 +157,10 @@ function ClientList() {
                                                 <FontAwesomeIcon icon={faEdit} color="orange" /> Edit
                                             </Link>
                                             <div></div>
-                                            <Link onClick={() => deleteItem(item._id)}>
+
+
+
+                                            <Link onClick={() => deleteItem(item._id)} >
                                                 <FontAwesomeIcon icon={faTrash} color="red" cursor="pointer" /> Delete
                                             </Link>
 

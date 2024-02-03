@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import NavBarManu from './Navbar/NavBarManu';
 import { BASEURL } from './constent';
+import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
+import toast, { Toaster } from 'react-hot-toast';
+
 
 export const Signin = () => {
 
@@ -23,44 +26,31 @@ export const Signin = () => {
         });
       };
     
+  const SigninAdmin = async (e) => {
+    e.preventDefault();
+
+    const URL = BASEURL + 'Clients/admin-login';
+
+    try {
+      const response = await axios.post(URL, AdminData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const data = response.data;
+      toast.success('Successfully Login')
+      localStorage.setItem('admin', JSON.stringify(data));
+      navigate('/');
     
-      const SigninAdmin = async (e) => {
 
+    } catch (error) {
 
-        e.preventDefault();
+      console.error('An error occurred:', error);
+      toast.error('An Unexpected error Occured');
 
-  const res =  await  fetch(BASEURL+'Clients/admin-login', {
-          method: 'POST',
-          headers: {
-    
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(AdminData),
-        })
-        try {
-          const data = await res.json();
-          if (res.status === 400) {
-            window.alert(data.error || ' Please fill the form properly.');
-          } else if (res.status === 401) {
-            window.alert(data.error || 'Invalid Login Detail');
-
-          }
-          else if (res.status === 404) {
-            window.alert(data.error || 'Admin Not Found');
-
-          }  else if (res.status === 200) {
-           
-           
-            localStorage.setItem('admin', JSON.stringify(data))
-            window.alert(data.message || 'Login Successful');
-            navigate('/');
-          } 
-        } catch (error) {
-          console.error('An error occurred:', error);
-          window.alert( 'An error occurred during Login. Please try again later.');
-        }
-      };
-    
+    }
+  };
     
     
   
@@ -69,6 +59,7 @@ export const Signin = () => {
         <div>
           <NavBarManu />
           <div className='Main-Section'>
+            <Toaster/>
             <h2>Sign in</h2>
             <div className="form-container">
               <div className="form-row">

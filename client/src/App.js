@@ -1,4 +1,5 @@
-import './App.css';
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from "./components/Home"
 import CreateClient from "./components/CreateClient";
 import ClientList from "./components/ClientList";
@@ -6,9 +7,11 @@ import ClientUpdate from './components/ClientUpdate';
 import { Signin } from './components/Signin';
 import BSB from './components/BSB';
 import Signup from './components/Signup';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+
 import PrivateComponent from './components/PrivateComponent';
 
+import './App.css';
 
 export default function App() {
   
@@ -20,6 +23,7 @@ export default function App() {
 
       <Router>
         <Routes>
+      
 <Route element={<PrivateComponent/>}>
           {/* Use "element" prop for rendering components */}
           <Route path="/" element={<Home />} />
